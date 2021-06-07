@@ -29,13 +29,14 @@ App::uses('AppController', 'Controller');
  * @link https://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
 class PagesController extends AppController {
+	public $components = array('DebugKit.Toolbar');
 
 /**
  * This controller does not use a model
  *
  * @var array
  */
-	public $uses = array();
+	public $uses = array('CustomerIO.CustomerIOApp');
 
 /**
  * Displays a view
@@ -46,6 +47,8 @@ class PagesController extends AppController {
  *   or MissingViewException in debug mode.
  */
 	public function display() {
+		$this->set('test',$this->CustomerIOApp->getRegion());
+
 		$path = func_get_args();
 
 		$count = count($path);

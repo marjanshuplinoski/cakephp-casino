@@ -1,4 +1,5 @@
 <?php
+print_r($test);
 /**
  * @link          https://cakephp.org CakePHP(tm) Project
  * @package       app.View.Pages
