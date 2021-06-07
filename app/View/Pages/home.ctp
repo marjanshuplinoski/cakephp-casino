@@ -1,5 +1,7 @@
 <?php
+// Region
 print_r($getRegion);
+// Customers
 print_r($setCustomer);
 print_r($getCustomerByEmail);
 print_r($deleteCustomer);
@@ -8,6 +10,11 @@ print_r($deleteCustomerDevice);
 print_r($suppressCustomerProfile);
 print_r($unSuppressCustomerProfile);
 print_r($unsubscribe);
+// Events
+print_r($trackCustomerEvent);
+print_r($trackAnonymousEvent);
+print_r($reportPushEvent);
+
 /**
  * @link          https://cakephp.org CakePHP(tm) Project
  * @package       app.View.Pages
