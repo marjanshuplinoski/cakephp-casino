@@ -8,8 +8,8 @@ print_r($deleteCustomer);
 print_r($addCustomerDevice);
 print_r($deleteCustomerDevice);
 print_r($suppressCustomerProfile);
-print_r(unSuppressCustomerProfile);
-print_r(unsubscribe);
+print_r($unSuppressCustomerProfile);
+print_r($unsubscribe);
 /**
  * @link          https://cakephp.org CakePHP(tm) Project
  * @package       app.View.Pages

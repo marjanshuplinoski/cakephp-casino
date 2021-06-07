@@ -155,13 +155,14 @@ class CustomerIOAppModel extends AppModel
 		return $response;
 	}
 
-	public function cURLPost($URL, $header = null, $data)
+	public function cURLPost($URL, $header = null, $data = null)
 	{
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $URL);
 		curl_setopt($ch, CURLOPT_POST, 1);
 
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		if (!empty($data))
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 
 		if (!empty($header))
 			curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
@@ -215,7 +216,6 @@ class CustomerIOAppModel extends AppModel
 		curl_close($ch);
 		return $response;
 	}
-
 
 
 }
