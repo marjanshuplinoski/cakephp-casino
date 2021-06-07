@@ -1,7 +1,5 @@
 <?php
 print_r($getRegion);
-print_r($deleteCustomer);
-print_r($getRegion);
 print_r($setCustomer);
 print_r($getCustomerByEmail);
 print_r($deleteCustomer);

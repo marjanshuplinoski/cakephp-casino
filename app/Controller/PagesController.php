@@ -47,7 +47,9 @@ class PagesController extends AppController {
  *   or MissingViewException in debug mode.
  */
 	public function display() {
+		// Region
 		$this->set('getRegion',$this->CustomerIOApp->getRegion());
+		// Customers
 		$data = '{"email":"user@example.com","created_at":0,"_update":false}';
 		$this->set('setCustomer',$this->CustomerIOApp->addEditCustomer('email',$data));
 		$this->set('getCustomerByEmail',$this->CustomerIOApp->getCustomersByEmail('user@example.com'));
