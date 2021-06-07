@@ -47,7 +47,17 @@ class PagesController extends AppController {
  *   or MissingViewException in debug mode.
  */
 	public function display() {
-		$this->set('test',$this->CustomerIOApp->getRegion());
+		$this->set('getRegion',$this->CustomerIOApp->getRegion());
+		$data = '{"email":"user@example.com","created_at":0,"_update":false}';
+		$this->set('setCustomer',$this->CustomerIOApp->addEditCustomer('email',$data));
+		$this->set('getCustomerByEmail',$this->CustomerIOApp->getCustomersByEmail('user@example.com'));
+		$this->set('deleteCustomer',$this->CustomerIOApp->deleteCustomer('user@example.com'));
+		$data = '{"device":{"id":"2134a","platform":"ios","last_used":1605647563}}';
+		$this->set('addCustomerDevice',$this->CustomerIOApp->addUpdateCustomerDevice('id',$data));
+		$this->set('deleteCustomerDevice',$this->CustomerIOApp->deleteCustomerDevice('user@example.com',1));
+		$this->set('suppressCustomerProfile',$this->CustomerIOApp->suppressCustomerProfile('user@example.com'));
+		$this->set('unSuppressCustomerProfile',$this->CustomerIOApp->unSuppressCustomerProfile('user@example.com'));
+		$this->set('unsubscribe',$this->CustomerIOApp->unsubscribe('user@example.com'));
 
 		$path = func_get_args();
 
