@@ -3,7 +3,7 @@
 print_r($getRegion);
 // Customers
 print_r($setCustomer);
-print_r($getCustomerByEmail);
+//print_r($getCustomerByEmail);
 print_r($deleteCustomer);
 print_r($addCustomerDevice);
 print_r($deleteCustomerDevice);
@@ -14,7 +14,9 @@ print_r($unsubscribe);
 print_r($trackCustomerEvent);
 print_r($trackAnonymousEvent);
 print_r($reportPushEvent);
-
+// Segments
+print_r($addSegment);
+print_r($removeSegment);
 /**
  * @link          https://cakephp.org CakePHP(tm) Project
  * @package       app.View.Pages

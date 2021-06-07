@@ -60,12 +60,17 @@ class PagesController extends AppController {
 		$this->set('suppressCustomerProfile',$this->CustomerIOApp->suppressCustomerProfile('user@example.com'));
 		$this->set('unSuppressCustomerProfile',$this->CustomerIOApp->unSuppressCustomerProfile('user@example.com'));
 		$this->set('unsubscribe',$this->CustomerIOApp->unsubscribe('user@example.com'));
-		//Events
+		// Events
 		$data = '{"name":"purchase","data":{"price":23.45,"product":"socks"}}';
 		$this->set('trackCustomerEvent',$this->CustomerIOApp->trackCustomerEvent('user@example.com',$data));
 		$this->set('trackAnonymousEvent',$this->CustomerIOApp->trackAnonymousEvent($data));
 		$data = '{"delivery_id":"RPILAgUBcRhIBqSfeiIwdIYJKxTY","event":"opened","device_id":"CIO-Delivery-Token from the notification","timestamp":1613063089}';
 		$this->set('reportPushEvent',$this->CustomerIOApp->reportPushEvent($data));
+		// Segments
+		$data = '{"ids":["1,2,3"]}';
+		$this->set('addSegment',$this->CustomerIOApp->addSegment(1,$data));
+		$this->set('removeSegment',$this->CustomerIOApp->removeSegment(1,$data));
+
 
 
 		$path = func_get_args();

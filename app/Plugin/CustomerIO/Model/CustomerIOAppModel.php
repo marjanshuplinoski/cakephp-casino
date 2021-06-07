@@ -206,7 +206,7 @@ class CustomerIOAppModel extends AppModel
 
 	public function trackAnonymousEvent($data)
 	{
-		$url = $this->config['Config']['US']['TRACK_API_URL'] . '/events';
+		$url = $this->config['Config']['US']['TRACK_API_URL'] . 'events';
 
 		$header = array(
 			'Authorization: Basic ' . base64_encode($this->config['Config']['SITE_ID'] . ':' . $this->config['Config']['API_KEY']),
@@ -236,6 +236,50 @@ class CustomerIOAppModel extends AppModel
 		$request = json_decode($this->cURLPost($url, $header, $data));
 		return $request;
 	}
+
+	/*
+	 * Add people to a manual segment
+	 * Add people to a manual segment by ID. If you send customer IDs that don’t exist yet,
+	 * we automatically create customer profiles for the new customer IDs. You are limited to
+	 * 1000 customer IDs per request.
+	 */
+
+	public function addSegment($segment_id, $data)
+	{
+		$url = $this->config['Config']['US']['TRACK_API_URL'] . 'segments/' . $segment_id . '/add_customers';
+
+		$header = array(
+			'Authorization: Basic ' . base64_encode($this->config['Config']['SITE_ID'] . ':' . $this->config['Config']['API_KEY']),
+			'content-type: application/json'
+		);
+
+		$request = json_decode($this->cURLPost($url, $header, $data));
+		return $request;
+	}
+
+	/*
+	 * Remove people from a manual segment
+	 * You can remove users from a manual segment by ID. You are limited to 1000 customer IDs per request.
+	 */
+
+	public function removeSegment($segment_id,$data)
+	{
+		$url = $this->config['Config']['US']['TRACK_API_URL'] . 'segments/' . $segment_id . '/remove_customers';
+
+		$header = array(
+			'Authorization: Basic ' . base64_encode($this->config['Config']['SITE_ID'] . ':' . $this->config['Config']['API_KEY']),
+			'content-type: application/json'
+		);
+
+		$request = json_decode($this->cURLPost($url, $header, $data));
+		return $request;
+	}
+
+
+
+
+
+
 	/*
 	 * ==============================================================
 	 * ==============================================================
