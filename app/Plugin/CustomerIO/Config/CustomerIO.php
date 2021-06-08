@@ -19,6 +19,7 @@ $config = array(
             ),
             'API_KEY' => 'ea609ce44ad3bf6bee36',
             'SITE_ID' => 'b14225e2364bd5601593',
+			'BETA_API_KEY' => 'b954d3d7668ba928a9494583b090d90e',
         )
     )
 );
