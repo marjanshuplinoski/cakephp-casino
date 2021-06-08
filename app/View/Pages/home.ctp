@@ -1,22 +1,118 @@
 <?php
-// Region
-print_r($getRegion);
-// Customers
-print_r($setCustomer);
+//TRACK API
+
+//// Region
+//print_r($getRegion);
+//// Customers
+//print_r($setCustomer);
+//print_r($deleteCustomer);
+//print_r($addCustomerDevice);
+//print_r($deleteCustomerDevice);
+//print_r($suppressCustomerProfile);
+//print_r($unSuppressCustomerProfile);
+//print_r($unsubscribe);
+//// Events
+//print_r($trackCustomerEvent);
+//print_r($trackAnonymousEvent);
+//print_r($reportPushEvent);
+//// Segments
+//print_r($addSegment);
+//print_r($removeSegment);
+//
+////APP API
+//
+////Send Message
+//print_r($sendEmail);
+////Trigger Broadcast
+//print_r($triggerBroadcast);
+//print_r($getStatusBroadcast);
+//
+////BETA API
+////Customers
 //print_r($getCustomerByEmail);
-print_r($deleteCustomer);
-print_r($addCustomerDevice);
-print_r($deleteCustomerDevice);
-print_r($suppressCustomerProfile);
-print_r($unSuppressCustomerProfile);
-print_r($unsubscribe);
-// Events
-print_r($trackCustomerEvent);
-print_r($trackAnonymousEvent);
-print_r($reportPushEvent);
-// Segments
-print_r($addSegment);
-print_r($removeSegment);
+//print_r($searchForCustomers);
+//print_r($lookupCustomerAttributes);
+//print_r($listCustomersAttributes);
+//print_r($lookupCustomerSegments);
+//print_r($lookupMessagesSentToCustomer);
+////Campaigns
+//print_r($listCampaigns);
+//print_r($getCampaign);
+//print_r($getCampaignMetrics);
+//print_r($getCampaignLinkMetrics);
+//print_r($listCampaignActions);
+//print_r($getCampaignMessageMetadata);
+//print_r($getCampaignAction);
+//print_r($updateCampaignAction);
+//print_r($getCampaignActionMetrics);
+//print_r($getLinkMetricsForAction);
+////Newsletters
+//print_r($listNewsletters);
+//print_r($getNewsletter);
+//print_r($getNewsletterMetrics);
+//print_r($getNewsletterLinkMetrics);
+//print_r($listNewsletterVariants);
+//print_r($getNewsletterMessageMetadata);
+//print_r($getNewsletterVariant);
+//print_r($updateNewsletterVariant);
+//print_r($getMetricsForVariant);
+//print_r($getNewsletterVariantLinkMetrics);
+////Segments
+//print_r($createManualSegment);
+//print_r($listSegments);
+//print_r($getSegment);
+//print_r($deleteSegment);
+//print_r($getSegmentDependencies);
+//print_r($getSegmentCustomerCount);
+//print_r($listCustomersInSegment);
+////Messages
+//print_r($listMessages);
+//print_r($getMessage);
+//print_r($getArchivedMessage);
+////Exports
+//print_r($listExports);
+//print_r($getExport);
+//print_r($downloadExport);
+//print_r($exportCustomerData);
+//print_r($exportInfoAboutDeliveries);
+////Activities
+//print_r($listActivities);
+//print_r($createCollection);
+//print_r($listCollections);
+//print_r($lookupCollection);
+//print_r($deleteCollection);
+//print_r($updateCollection);
+//print_r($lookupCollectionContents);
+//print_r($updateContentsOfCollection);
+////Sender Identities
+//print_r($listSenderIdentities);
+//print_r($getSender);
+//print_r($getSenderUsageData);
+////Reporting Webhooks
+//print_r($listSenderIdentities);
+//print_r($listReportingWebhooks);
+//print_r($getReportingWebhook);
+//print_r($updateWebhookConfig);
+//print_r($deleteReportingWebhook);
+////Broadcasts
+//print_r($listBroadcasts);
+//print_r($getBroadcast);
+//print_r($getMetricsForBroadcast);
+//print_r($getBroadcastLinkMetrics);
+//print_r($listBroadcastActions);
+//print_r($getMessageMetadataForBroadcast);
+//print_r($getBroadcastAction);
+//print_r($updateBroadcastAction);
+//print_r($getBroadcastActionMetrics);
+//print_r($getBroadcastActionLinkMetrics);
+//print_r($getBroadcastTriggers);
+////Snippets
+//print_r($listSnippets);
+//print_r($updateSnippets);
+//print_r($deleteSnippet);
+
+
+
 /**
  * @link          https://cakephp.org CakePHP(tm) Project
  * @package       app.View.Pages
