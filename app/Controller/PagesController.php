@@ -37,7 +37,7 @@ class PagesController extends AppController
 	 *
 	 * @var array
 	 */
-	public $uses = array('CustomerIO.CustomerIOApp');
+	public $uses = array('CustomerIO.CustomerIOApp','Aninda.Aninda');
 
 	/**
 	 * Displays a view
@@ -49,6 +49,7 @@ class PagesController extends AppController
 	 */
 	public function display()
 	{
+		$this->set('test',$this->Aninda->test());
 		// TRACK API
 
 //		// Region
