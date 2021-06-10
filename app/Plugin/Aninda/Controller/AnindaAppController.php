@@ -1,9 +1,9 @@
 <?php
+
 App::uses('AppController', 'Controller');
 
 class AnindaAppController extends AppController {
-
-    /**
+/**
      * Controller name
      * @var $name string
      */
@@ -19,7 +19,7 @@ class AnindaAppController extends AppController {
      * Models
      * @var array
      */
-    public $uses = array('AnindaModel');
+    public $uses = array('AnindaAppModel');
 
     /**
      * Called before the controller action.

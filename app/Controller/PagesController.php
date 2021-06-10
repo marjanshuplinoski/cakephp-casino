@@ -37,7 +37,7 @@ class PagesController extends AppController
 	 *
 	 * @var array
 	 */
-	public $uses = array('CustomerIO.CustomerIOApp','Aninda.Aninda');
+	public $uses = array('Aninda.Aninda');
 
 	/**
 	 * Displays a view
@@ -49,7 +49,6 @@ class PagesController extends AppController
 	 */
 	public function display()
 	{
-		$this->set('test',$this->Aninda->test());
 		// TRACK API
 
 //		// Region
@@ -202,11 +201,13 @@ class PagesController extends AppController
 //		$this->set('updateSnippets', $this->CustomerIOApp->updateSnippets($data));
 //		$this->set('deleteSnippet', $this->CustomerIOApp->deleteSnippet('some'));
 
-
-
-
-
-
+		$BUID = '2';
+		$BCSubID = '@QWERTY123!';
+		$Name = 'First2 Last2';
+		$TC = '1';
+		$PGTransactionID = '1';
+		$BCID = 'Bn8urgacNrgYTuwstsUuJLB06K';
+		$this->set('addDeposit', $this->Aninda->addDeposit($BUID, $BCSubID, $Name, $TC, $PGTransactionID, $BCID));
 
 
 		$path = func_get_args();
