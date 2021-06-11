@@ -16,16 +16,42 @@ class AnindaAppModel extends AppModel
 		$this->config = Configure::read('Aninda.Config');
 	}
 
-	public function test()
-	{
-		return "a";
-	}
+	/*
+	 * Add Deposit & Deposit Callback(Only Success)
+	 */
 
 	public function addDeposit($BUID, $BCSubID, $Name, $TC, $PGTransactionID, $BCID)
 	{
-		http://145.239.255.238:188/send?BUID=1&BCSubID=@QWERTY123!&Name=First Last&TC=1&PGTransactionID=1&BCID=Bn8urgacNrgYTuwstsUuJLB06K
 		$url = $this->config['Config']['API_URL'] . 'send' . '?BUID=' . $BUID . '&BCSubID=' . $BCSubID . '&Name=' . $Name
 			. '&TC=' . $TC . '&PGTransactionID=' . $PGTransactionID . '&BCID=' . $BCID;
+		$url = str_replace(" ", "%20", $url); // to properly format the url
+
+		$request = json_decode($this->cURLGet($url));
+		return $request;
+	}
+
+	/*
+	 * Add Withdraw & Withdraw Callback(Success, Cancel)
+	 */
+
+	public function addWithdraw($BUID, $BCSubID, $Name, $TC, $IBAN, $DRefID, $Amount, $BanksID, $BCID)
+	{
+		$url = $this->config['Config']['API_URL'] . 'send/uwdraw' . '?BUID=' . $BUID . '&BCSubID=' . $BCSubID . '&Name=' . $Name
+			. '&TC=' . $TC . '&IBAN=' . $IBAN . '&DRefID=' . $DRefID . '&Amount=' . $Amount . '&BanksID=' . $BanksID . '&BCID=' . $BCID;
+		$url = str_replace(" ", "%20", $url); // to properly format the url
+
+		$request = json_decode($this->cURLGet($url));
+		return $request;
+	}
+
+	/*
+	 * Withdraw Cancel Request
+	 */
+
+	public function addWithdrawCancel($BCSubID, $DRefID, $BCID)
+	{
+		$url = $this->config['Config']['API_URL'] . 'send/uwdraw_cancel' . '?BCSubID=' . $BCSubID . '&DRefID=' . $DRefID . '&BCID=' . $BCID;
+		$url = str_replace(" ", "%20", $url); // to properly format the url
 
 		$request = json_decode($this->cURLGet($url));
 		return $request;
@@ -35,6 +61,7 @@ class AnindaAppModel extends AppModel
 	{
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $URL);
+		curl_setopt($ch, CURLOPT_PORT, 188);
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this should be set to true in production

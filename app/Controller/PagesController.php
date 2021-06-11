@@ -201,13 +201,34 @@ class PagesController extends AppController
 //		$this->set('updateSnippets', $this->CustomerIOApp->updateSnippets($data));
 //		$this->set('deleteSnippet', $this->CustomerIOApp->deleteSnippet('some'));
 
-		$BUID = '2';
-		$BCSubID = '@QWERTY123!';
-		$Name = 'First2 Last2';
-		$TC = '1';
-		$PGTransactionID = '1';
-		$BCID = 'Bn8urgacNrgYTuwstsUuJLB06K';
-		$this->set('addDeposit', $this->Aninda->addDeposit($BUID, $BCSubID, $Name, $TC, $PGTransactionID, $BCID));
+		//Add Deposit Aninda
+//		$BUID = '2';
+//		$BCSubID = '@QWERTY123!';
+//		$Name = 'First3Last3';
+//		$TC = '1';
+//		$PGTransactionID = '1';
+//		$BCID = 'Bn8urgacNrgYTuwstsUuJLB06K';
+//		$this->set('addDeposit', $this->Aninda->addDeposit($BUID, $BCSubID, $Name, $TC, $PGTransactionID, $BCID));
+
+		//Add Withdraw Aninda
+
+//		$BUID='2';
+//		$BCSubID='@QWERTY123!';
+//		$Name='Name Surname';
+//		$TC='1';
+//		$IBAN='12313112';
+//		$DRefID='2';
+//		$Amount='12422';
+//		$BanksID='1221';
+//		$BCID='Bn8urgacNrgYTuwstsUuJLB06K';
+//
+		//Add Withdraw Cancel Aninda
+
+		$BCSubID='@QWERTY123!';
+		$DRefID='2';
+		$BCID='Bn8urgacNrgYTuwstsUuJLB06K';
+
+		$this->set('addWithdrawCancel', $this->Aninda->addWithdrawCancel($BCSubID, $DRefID, $BCID));
 
 
 		$path = func_get_args();
