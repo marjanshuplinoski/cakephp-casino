@@ -9,7 +9,7 @@ $config = array(
             'US' => array(
                 'TRACK_API_URL' => 'https://track.customer.io/api/v1/',
                 'APP_API_URL' => 'https://api.customer.io/v1/',
-                'BETA_API_URL' => 'https://beta-api.customer.io/v1/api',
+                'BETA_API_URL' => 'https://beta-api.customer.io/v1/api/',
             ),
             'EU' => array(
                 'TRACK_API_URL' => 'https://track-eu.customer.io/api/v1/',

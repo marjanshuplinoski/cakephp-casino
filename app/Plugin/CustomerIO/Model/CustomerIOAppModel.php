@@ -36,7 +36,7 @@ class CustomerIOAppModel extends AppModel {
         $region = $this->setRegion();
         return $this->config['Config'][strtoupper($region)]['TRACK_API_URL'];
     }
-    
+
     public function getBetaAPIURL() {
         $region = $this->setRegion();
         return $this->config['Config'][strtoupper($region)]['BETA_API_URL'];
@@ -54,7 +54,7 @@ class CustomerIOAppModel extends AppModel {
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1); //FOR THE TEST URL API 
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1); //FOR THE TEST URL API
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1); //FOR THE TEST URL API
 
         $response = curl_exec($ch);
@@ -98,9 +98,9 @@ class CustomerIOAppModel extends AppModel {
 
         $response = curl_exec($ch);
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        
+
         curl_close($ch);
-        
+
         if ($response == "OK" && (int)$status_code == 200) {
             return $response;
         } else {

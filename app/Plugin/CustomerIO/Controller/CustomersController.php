@@ -28,7 +28,7 @@ class CustomersController extends CustomerIOAppController {
     public function beforeFilter() {
         $this->autoRender = false;
         $this->layout = 'ajax';
-        $this->Auth->allow('*');
+        $this->Auth->allow('addUpdateCustomer','getCustomersByEmail');
         parent::beforeFilter();
     }
 
@@ -41,8 +41,9 @@ class CustomersController extends CustomerIOAppController {
             "first_name" => "John",
             "last_name" => "Doe"
         );
-        $response = $this->Customer->addUpdateCustomer($user_id, $email, $update, $attributes);
-        return $response;
+		$response = $this->Customer->addUpdateCustomer($user_id, $email, $update, $attributes);
+		$this->response->body(json_encode(array('response' => $response)));
+        return $this->$response;
     }
 
 }

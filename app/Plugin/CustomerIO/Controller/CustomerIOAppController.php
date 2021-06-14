@@ -2,7 +2,7 @@
 App::uses('AppController', 'Controller');
 
 class CustomerIOAppController extends AppController {
-    
+
     /**
      * Controller name
      * @var $name string
@@ -20,7 +20,12 @@ class CustomerIOAppController extends AppController {
      * @var array
      */
     public $uses = array('CustomerIOAppModel');
-    
+	/**
+	 * Auth
+	 * @var array
+	 */
+	public $components = array('Auth');
+
     /**
      * Called before the controller action.
      */
