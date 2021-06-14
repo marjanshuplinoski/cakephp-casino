@@ -4,7 +4,7 @@
  * Live credentials
  */
 $config = array(
-    'CustomerIO.Config' => array(
+    'old_CustomerIO.Config' => array(
         'Config' => array(
             'US' => array(
                 'TRACK_API_URL' => 'https://track.customer.io/api/v1/',
@@ -28,7 +28,7 @@ $config = array(
  * Stage credentials
  */
 //$config = array(
-//    'CustomerIO.Config' => array(
+//    'old_CustomerIO.Config' => array(
 //        'Config' => array(
 //            ['US'] => array(
 //                'TRACK_API_URL' => 'https://track.customer.io/api/v1/',

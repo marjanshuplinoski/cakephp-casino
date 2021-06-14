@@ -8,12 +8,12 @@ class CustomerIOAppModel extends AppModel
 	public function __construct($id = false, $table = null, $ds = null)
 	{
 		parent::__construct($id, $table, $ds);
-		Configure::load('CustomerIO.CustomerIO');
+		Configure::load('old_CustomerIO.old_CustomerIO');
 
-		if (Configure::read('CustomerIO.Config') == 0)
+		if (Configure::read('old_CustomerIO.Config') == 0)
 			throw new Exception('Config not found', 500);
 
-		$this->config = Configure::read('CustomerIO.Config');
+		$this->config = Configure::read('old_CustomerIO.Config');
 	}
 
 	// TRACK API

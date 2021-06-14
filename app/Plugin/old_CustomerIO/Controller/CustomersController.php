@@ -2,13 +2,13 @@
 
 App::uses('AppController', 'Controller');
 
-class CustomerIOController extends CustomerIOAppController {
+class CustomersController extends CustomerIOAppController {
 
     /**
      * Controller name
      * @var $name string
      */
-    public $name = 'CustomerIO';
+    public $name = 'Customers';
 
     /**
      * Paginate
@@ -20,14 +20,21 @@ class CustomerIOController extends CustomerIOAppController {
      * Models
      * @var array
      */
-    public $uses = array();
+    public $uses = array('old_CustomerIO.Customer');
 
+    /**
+     * Called before the controller action.
+     */
     public function beforeFilter() {
         $this->autoRender = false;
         $this->layout = 'ajax';
-        $this->Auth->allow();
+        $this->Auth->allow('addOrUpdateCustomer');
         parent::beforeFilter();
     }
 
+    public function addOrUpdateCustomer($identifier) {
+
+
+    }
 
 }
