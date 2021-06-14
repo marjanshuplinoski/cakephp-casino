@@ -113,3 +113,4 @@ CakeLog::config('error', array(
 CakePlugin::load('DebugKit');
 CakePlugin::load('old_CustomerIO');
 CakePlugin::load('Aninda');
+CakePlugin::load('CustomerIO');

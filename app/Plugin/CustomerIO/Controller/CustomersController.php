@@ -28,10 +28,10 @@ class CustomersController extends CustomerIOAppController {
     public function beforeFilter() {
         $this->autoRender = false;
         $this->layout = 'ajax';
-        $this->Auth->allow('addUpdateCustomer');
+        $this->Auth->allow('*');
         parent::beforeFilter();
     }
-    
+
     public function addUpdateCustomer() {
         //test data
         $user_id = 887;
