@@ -64,6 +64,17 @@
 	Router::connect('/CustomerIO/Broadcasts/getBroadcastActionMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'getBroadcastActionMetrics'));
 	Router::connect('/CustomerIO/Broadcasts/getBroadcastActionLinkMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'getBroadcastActionLinkMetrics'));
 	Router::connect('/CustomerIO/Broadcasts/getBroadcastTriggers', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'getBroadcastTriggers'));
+	//Campaigns
+	Router::connect('/CustomerIO/Campaigns/listCampaigns', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Campaigns', 'action' => 'listCampaigns'));
+	Router::connect('/CustomerIO/Campaigns/getCampaign', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Campaigns', 'action' => 'getCampaign'));
+	Router::connect('/CustomerIO/Campaigns/getCampaignMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Campaigns', 'action' => 'getCampaignMetrics'));
+	Router::connect('/CustomerIO/Campaigns/getCampaignLinkMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Campaigns', 'action' => 'getCampaignLinkMetrics'));
+	Router::connect('/CustomerIO/Campaigns/listCampaignActions', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Campaigns', 'action' => 'listCampaignActions'));
+	Router::connect('/CustomerIO/Campaigns/getCampaignMessageMetadata', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Campaigns', 'action' => 'getCampaignMessageMetadata'));
+	Router::connect('/CustomerIO/Campaigns/getCampaignAction', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Campaigns', 'action' => 'getCampaignAction'));
+	Router::connect('/CustomerIO/Campaigns/updateCampaignAction', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Campaigns', 'action' => 'updateCampaignAction'));
+	Router::connect('/CustomerIO/Campaigns/getCampaignActionMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Campaigns', 'action' => 'getCampaignActionMetrics'));
+	Router::connect('/CustomerIO/Campaigns/getLinkMetricsForAction', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Campaigns', 'action' => 'getLinkMetricsForAction'));
 
 
 /**

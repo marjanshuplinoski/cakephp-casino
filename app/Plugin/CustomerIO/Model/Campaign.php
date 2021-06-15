@@ -3,179 +3,157 @@
 App::uses('AppModel', 'Model');
 App::uses('HttpSocket', 'Network/Http');
 
-class Campaign extends CustomerIOAppModel {
+class Campaign extends CustomerIOAppModel
+{
 
-    /**
-     * Model name
-     * @var string
-     */
-    public $name = 'Campaign';
-    public $useTable = false;
+	/**
+	 * Model name
+	 * @var string
+	 */
+	public $name = 'Campaign';
+	public $useTable = false;
 
-    //BETA API START
-    /*
-     * List campaigns
-     * Returns a list of your campaigns and associated metadata.
-     */
+	//BETA API START
+	/*
+	 * List campaigns
+	 * Returns a list of your campaigns and associated metadata.
+	 */
 
-    public function listCampaigns() {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'campaigns';
+	public function listCampaigns()
+	{
+		$url = $this->getBetaAPIURL() . 'campaigns';
+		$header = $this->getHeaderAuthBearer();
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
 
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
+	/*
+	 * Get a campaign
+	 * Returns metadata for an individual campaign.
+	 */
 
-        $request = json_decode($this->cURLGet($url, $header));
-        return $request;
-    }
+	public function getCampaign($campaign_id)
+	{
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id;
+		$header = $this->getHeaderAuthBearer();
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
 
-    /*
-     * Get a campaign
-     * Returns metadata for an individual campaign.
-     */
+	/*
+	 * Get campaign metrics
+	 * Returns a list of metrics for an individual campaign both in total and in steps (days, weeks, etc).
+	 * Stepped series metrics return from oldest to newest (i.e. the 0-index for any result is the oldest step/period).
+	 */
 
-    public function getCampaign($campaign_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'campaigns/' . $campaign_id;
+	public function getCampaignMetrics($campaign_id)
+	{
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/metrics';
+		$header = $this->getHeaderAuthBearer();
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
 
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
+	/*
+	 * Get campaign link metrics
+	 * Returns metrics for link clicks within a campaign, both in total and in series periods (days, weeks, etc).
+	 * series metrics are ordered oldest to newest (i.e. the 0-index for any result is the oldest step/period).
+	 */
 
-        $request = json_decode($this->cURLGet($url, $header));
-        return $request;
-    }
+	public function getCampaignLinkMetrics($campaign_id)
+	{
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/metrics/links';
+		$header = $this->getHeaderAuthBearer();
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
 
-    /*
-     * Get campaign metrics
-     * Returns a list of metrics for an individual campaign both in total and in steps (days, weeks, etc).
-     * Stepped series metrics return from oldest to newest (i.e. the 0-index for any result is the oldest step/period).
-     */
+	/*
+	 * List campaign actions
+	 * Returns the operations in a campaign workflow. Each object in the response represents a 'tile' in the campaign builder.
+	 */
 
-    public function getCampaignMetrics($campaign_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'campaigns/' . $campaign_id . '/metrics';
+	public function listCampaignActions($campaign_id)
+	{
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/actions';
+		$header = $this->getHeaderAuthBearer();
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
 
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
+	/*
+	 * Get campaign message metadata
+	 * Returns metadata for the messages in a campaign. Provide query parameters to refine the metrics you want to return.
+	 */
 
-        $request = json_decode($this->cURLGet($url, $header));
-        return $request;
-    }
+	public function getCampaignMessageMetadata($campaign_id)
+	{
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/messages';
+		$header = $this->getHeaderAuthBearer();
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
 
-    /*
-     * Get campaign link metrics
-     * Returns metrics for link clicks within a campaign, both in total and in series periods (days, weeks, etc).
-     * series metrics are ordered oldest to newest (i.e. the 0-index for any result is the oldest step/period).
-     */
+	/*
+	 * Get a campaign action
+	 * Returns information about a specific action in a campaign.
+	 */
 
-    public function getCampaignLinkMetrics($campaign_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'campaigns/' . $campaign_id . '/metrics/links';
+	public function getCampaignAction($campaign_id, $action_id)
+	{
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/actions/' . $action_id;
+		$header = $this->getHeaderAuthBearer();
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
 
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
+	/*
+	 * Update a campaign action
+	 * Update the contents of a campaign action, including the body of messages and HTTP requests.
+	 */
 
-        $request = json_decode($this->cURLGet($url, $header));
-        return $request;
-    }
+	public function updateCampaignAction($campaign_id, $action_id, $data)
+	{
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/actions/' . $action_id;
+		$header = $this->getHeaderAuthBearerJson();
+		$request = json_decode($this->cURLPut($url, $header, json_encode($data)));
+		return $request;
+	}
 
-    /*
-     * List campaign actions
-     * Returns the operations in a campaign workflow. Each object in the response represents a 'tile' in the campaign builder.
-     */
+	/*
+	 * Get campaign action metrics
+	 * Returns a list of metrics for an individual action both in total and in steps (days, weeks, etc) over a period of time.
+	 * Stepped series metrics return from oldest to newest (i.e. the 0-index for any result is the oldest step/period).
+	 */
 
-    public function listCampaignActions($campaign_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'campaigns/' . $campaign_id . '/actions';
+	public function getCampaignActionMetrics($campaign_id, $action_id)
+	{
+		$url = $this->config['Config']['US']['BETA_API_URL'] . 'campaigns/' . $campaign_id . '/actions/' . $action_id . '/metrics';
 
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
+		$header = array(
+			'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
+		);
 
-        $request = json_decode($this->cURLGet($url, $header));
-        return $request;
-    }
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
 
-    /*
-     * Get campaign message metadata
-     * Returns metadata for the messages in a campaign. Provide query parameters to refine the metrics you want to return.
-     */
+	/*
+	 * Get link metrics for an action
+	 * Returns link click metrics for an individual action. Unless you specify otherwise, the response contains data for the maximum period by days (45 days).
+	 */
 
-    public function getCampaignMessageMetadata($campaign_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'campaigns/' . $campaign_id . '/messages';
+	public function getLinkMetricsForAction($campaign_id, $action_id)
+	{
+		$url = $this->config['Config']['US']['BETA_API_URL'] . 'campaigns/' . $campaign_id . '/actions/' . $action_id . '/metrics/links';
 
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
+		$header = array(
+			'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
+		);
 
-        $request = json_decode($this->cURLGet($url, $header));
-        return $request;
-    }
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
 
-    /*
-     * Get a campaign action
-     * Returns information about a specific action in a campaign.
-     */
-
-    public function getCampaignAction($campaign_id, $action_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'campaigns/' . $campaign_id . '/actions/' . $action_id;
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
-        $request = json_decode($this->cURLGet($url, $header));
-        return $request;
-    }
-
-    /*
-     * Update a campaign action
-     * Update the contents of a campaign action, including the body of messages and HTTP requests.
-     */
-
-    public function updateCampaignAction($campaign_id, $action_id, $data) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'campaigns/' . $campaign_id . '/actions/' . $action_id;
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY'],
-            'content-type: application/json'
-        );
-
-        $request = json_decode($this->cURLPut($url, $header, $data));
-        return $request;
-    }
-
-    /*
-     * Get campaign action metrics
-     * Returns a list of metrics for an individual action both in total and in steps (days, weeks, etc) over a period of time.
-     * Stepped series metrics return from oldest to newest (i.e. the 0-index for any result is the oldest step/period).
-     */
-
-    public function getCampaignActionMetrics($campaign_id, $action_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'campaigns/' . $campaign_id . '/actions/' . $action_id . '/metrics';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
-        $request = json_decode($this->cURLGet($url, $header));
-        return $request;
-    }
-
-    /*
-     * Get link metrics for an action
-     * Returns link click metrics for an individual action. Unless you specify otherwise, the response contains data for the maximum period by days (45 days).
-     */
-
-    public function getLinkMetricsForAction($campaign_id, $action_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'campaigns/' . $campaign_id . '/actions/' . $action_id . '/metrics/links';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
-        $request = json_decode($this->cURLGet($url, $header));
-        return $request;
-    }
-
-    //BETA API END
+	//BETA API END
 }
