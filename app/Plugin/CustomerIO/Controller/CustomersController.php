@@ -142,7 +142,7 @@ class CustomersController extends CustomerIOAppController
 		//test data
 		$search_query = 'MD';
 		$data = array('filter' => array('and' => array(0 => array('and' => array(0 => array('segment' => array('id' => 'string',), 'attribute' => array('field' => 'unsubscribed', 'operator' => 'eq', 'value' => true,),),), 'or' => array(0 => array('segment' => array('id' => 'string',), 'attribute' => array('field' => 'unsubscribed', 'operator' => 'eq', 'value' => true,),),), 'not' => array('and' => array(0 => array('segment' => array('id' => 'string',), 'attribute' => array('field' => 'unsubscribed', 'operator' => 'eq', 'value' => true,),),), 'or' => array(0 => array('segment' => array('id' => 'string',), 'attribute' => array('field' => 'unsubscribed', 'operator' => 'eq', 'value' => true,),),), 'segment' => array('id' => 'string',), 'attribute' => array('field' => 'unsubscribed', 'operator' => 'eq', 'value' => true,),), 'segment' => array('id' => '1',), 'attribute' => array('field' => 'unsubscribed', 'operator' => 'eq', 'value' => true,),),),),);
-		$limit = 1;
+		$limit = 1;				// up to 1000 results per page
 
 		$response = $this->Customer->searchForCustomers($search_query, $limit, $data);
 		$response = json_decode(json_encode($response), true);
@@ -164,7 +164,7 @@ class CustomersController extends CustomerIOAppController
 	public function listCustomersAndAttributes()
 	{
 		//test data
-		$data = array('ids' => array('test1'));
+		$data = array('ids' => array('test1','887'));		// up to 100 ids
 
 		$response = $this->Customer->listCustomersAndAttributes($data);
 		$response = json_decode(json_encode($response), true);
