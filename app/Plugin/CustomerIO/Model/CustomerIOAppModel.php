@@ -26,9 +26,6 @@ class CustomerIOAppModel extends AppModel {
         return $region->region;
     }
 
-    public function getTrackAPIAuth() {
-        return base64_encode($this->config['Config']['SITE_ID'] . ':' . $this->config['Config']['API_KEY']);
-    }
 
     public function getTrackAPIURL() {
         $region = $this->setRegion();
@@ -45,6 +42,13 @@ class CustomerIOAppModel extends AppModel {
         return $this->config['Config'][strtoupper($region)]['BETA_API_URL'];
     }
 
+	public function getAPPAPIURL(){
+    	$region = $this->setRegion();
+    	return $this->config['Config'][strtoupper($region)]['APP_API_URL'];
+	}
+	public function getTrackAPIAuth() {
+	return base64_encode($this->config['Config']['SITE_ID'] . ':' . $this->config['Config']['API_KEY']);
+}
     public function getHeaderAuthBasic(){
     	return array(
 			'Authorization: Basic ' . base64_encode($this->config['Config']['SITE_ID'] . ':' . $this->config['Config']['API_KEY'])
