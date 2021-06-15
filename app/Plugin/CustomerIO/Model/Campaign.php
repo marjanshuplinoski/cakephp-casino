@@ -128,12 +128,8 @@ class Campaign extends CustomerIOAppModel
 
 	public function getCampaignActionMetrics($campaign_id, $action_id)
 	{
-		$url = $this->config['Config']['US']['BETA_API_URL'] . 'campaigns/' . $campaign_id . '/actions/' . $action_id . '/metrics';
-
-		$header = array(
-			'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-		);
-
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/actions/' . $action_id . '/metrics';
+		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
 	}
@@ -145,12 +141,8 @@ class Campaign extends CustomerIOAppModel
 
 	public function getLinkMetricsForAction($campaign_id, $action_id)
 	{
-		$url = $this->config['Config']['US']['BETA_API_URL'] . 'campaigns/' . $campaign_id . '/actions/' . $action_id . '/metrics/links';
-
-		$header = array(
-			'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-		);
-
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/actions/' . $action_id . '/metrics/links';
+		$header = $this->getHeaderAuthBearerJson();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
 	}
