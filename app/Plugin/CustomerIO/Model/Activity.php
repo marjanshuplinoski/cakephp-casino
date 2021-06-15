@@ -21,11 +21,9 @@ class Activity extends CustomerIOAppModel
 
 	public function listActivities($start_string, $type, $name, $deleted, $customer_id, $limit)
 	{
-		$url = $this->config['Config']['US']['BETA_API_URL'] . 'activities?start=' . $start_string . '&type=' . $type . '&name=' . $name . '&deleted=' . $deleted . '&customer_id=' . $customer_id . '&limit=' . $limit;
+		$url = $this->getBetaAPIURL() . 'activities?start=' . $start_string . '&type=' . $type . '&name=' . $name . '&deleted=' . $deleted . '&customer_id=' . $customer_id . '&limit=' . $limit;
 
-		$header = array(
-			'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-		);
+		$header = $this->getHeaderAuthBearer();
 
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
