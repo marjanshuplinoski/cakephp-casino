@@ -75,6 +75,15 @@
 	Router::connect('/CustomerIO/Campaigns/updateCampaignAction', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Campaigns', 'action' => 'updateCampaignAction'));
 	Router::connect('/CustomerIO/Campaigns/getCampaignActionMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Campaigns', 'action' => 'getCampaignActionMetrics'));
 	Router::connect('/CustomerIO/Campaigns/getLinkMetricsForAction', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Campaigns', 'action' => 'getLinkMetricsForAction'));
+	//Collections
+	Router::connect('/CustomerIO/Collections/createCollection', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Collections','action'=>'createCollection'));
+	Router::connect('/CustomerIO/Collections/listCollections', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Collections','action'=>'listCollections'));
+	Router::connect('/CustomerIO/Collections/lookupCollection', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Collections','action'=>'lookupCollection'));
+	Router::connect('/CustomerIO/Collections/deleteCollection', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Collections','action'=>'deleteCollection'));
+	Router::connect('/CustomerIO/Collections/updateCollection', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Collections','action'=>'updateCollection'));
+	Router::connect('/CustomerIO/Collections/lookupCollectionContents', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Collections','action'=>'lookupCollectionContents'));
+	Router::connect('/CustomerIO/Collections/updateContentsOfCollection', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Collections','action'=>'updateContentsOfCollection'));
+
 
 
 /**

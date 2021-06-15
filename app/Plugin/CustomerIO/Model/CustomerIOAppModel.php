@@ -189,7 +189,7 @@ class CustomerIOAppModel extends AppModel {
 
 		curl_close($ch);
 
-		if ((int)$status_code == 200) {
+		if ((int)$status_code == 200 || (int)$status_code == 204) {
 			return json_encode(array('status' => 'success', 'status_code' => $status_code, 'data' => $response));
 		} else {
 			return json_encode(array('status' => 'error' ,'status_code' => $status_code, 'data' => $response));
