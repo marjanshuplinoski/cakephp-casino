@@ -49,6 +49,21 @@
 	//
 	//Activities
 	Router::connect('/CustomerIO/Activities/listActivities', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Activities', 'action' => 'listActivities'));
+	//Broacasts
+	Router::connect('/CustomerIO/Broadcasts/triggerBroadcast', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'triggerBroadcast'));
+	Router::connect('/CustomerIO/Broadcasts/getStatusBroadcast', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'getStatusBroadcast'));
+	Router::connect('/CustomerIO/Broadcasts/listErrorsFromBroadcast', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'listErrorsFromBroadcast'));
+	Router::connect('/CustomerIO/Broadcasts/listBroadcasts', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'listBroadcasts'));
+	Router::connect('/CustomerIO/Broadcasts/getBroadcast', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'getBroadcast'));
+	Router::connect('/CustomerIO/Broadcasts/getMetricsForBroadcast', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'getMetricsForBroadcast'));
+	Router::connect('/CustomerIO/Broadcasts/getBroadcastLinkMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'getBroadcastLinkMetrics'));
+	Router::connect('/CustomerIO/Broadcasts/listBroadcastActions', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'listBroadcastActions'));
+	Router::connect('/CustomerIO/Broadcasts/getMessageMetadataForBroadcast', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'getMessageMetadataForBroadcast'));
+	Router::connect('/CustomerIO/Broadcasts/getBroadcastAction', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'getBroadcastAction'));
+	Router::connect('/CustomerIO/Broadcasts/updateBroadcastAction', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'updateBroadcastAction'));
+	Router::connect('/CustomerIO/Broadcasts/getBroadcastActionMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'getBroadcastActionMetrics'));
+	Router::connect('/CustomerIO/Broadcasts/getBroadcastActionLinkMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'getBroadcastActionLinkMetrics'));
+	Router::connect('/CustomerIO/Broadcasts/getBroadcastTriggers', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Broadcasts', 'action' => 'getBroadcastTriggers'));
 
 
 /**

@@ -22,13 +22,8 @@ class Broadcast extends CustomerIOAppModel {
      */
 
     public function triggerBroadcast($broadcast_id, $data) {
-        $url = $this->config['Config']['US']['APP_API_URL'] . '/campaigns/' . $broadcast_id . '/triggers';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY'],
-            'content-type: application/json'
-        );
-
+        $url = $this->getAPPAPIURL() . '/campaigns/' . $broadcast_id . '/triggers';
+        $header = $this->getHeaderAuthBearerJson();
         $request = json_decode($this->cURLPost($url, $header, $data));
         return $request;
     }
@@ -39,12 +34,8 @@ class Broadcast extends CustomerIOAppModel {
      */
 
     public function getStatusBroadcast($broadcast_id, $trigger_id) {
-        $url = $this->config['Config']['US']['APP_API_URL'] . 'campaigns/' . $broadcast_id . '/triggers/' . $trigger_id;
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getAPPAPIURL() . 'campaigns/' . $broadcast_id . '/triggers/' . $trigger_id;
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -56,12 +47,8 @@ class Broadcast extends CustomerIOAppModel {
      */
 
     public function listErrorsFromBroadcast($broadcast_id, $trigger_id) {
-        $url = $this->config['Config']['US']['APP_API_URL'] . 'campaigns/' . $broadcast_id . '/triggers/' . $trigger_id . '/errors';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getAPPAPIURL(). 'campaigns/' . $broadcast_id . '/triggers/' . $trigger_id . '/errors';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -74,12 +61,8 @@ class Broadcast extends CustomerIOAppModel {
      */
 
     public function listBroadcasts() {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'broadcasts';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'broadcasts';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -90,12 +73,8 @@ class Broadcast extends CustomerIOAppModel {
      */
 
     public function getBroadcast($broadcast_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'broadcasts/' . $broadcast_id;
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'broadcasts/' . $broadcast_id;
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -107,12 +86,8 @@ class Broadcast extends CustomerIOAppModel {
      */
 
     public function getMetricsForBroadcast($broadcast_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'broadcasts/' . $broadcast_id . '/metrics';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'broadcasts/' . $broadcast_id . '/metrics';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -124,12 +99,8 @@ class Broadcast extends CustomerIOAppModel {
      */
 
     public function getBroadcastLinkMetrics($broadcast_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'broadcasts/' . $broadcast_id . '/metrics/links';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'broadcasts/' . $broadcast_id . '/metrics/links';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -140,12 +111,8 @@ class Broadcast extends CustomerIOAppModel {
      */
 
     public function listBroadcastActions($broadcast_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'broadcasts/' . $broadcast_id . '/actions';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'broadcasts/' . $broadcast_id . '/actions';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -156,12 +123,8 @@ class Broadcast extends CustomerIOAppModel {
      */
 
     public function getMessageMetadataForBroadcast($broadcast_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'broadcasts/' . $broadcast_id . '/messages';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'broadcasts/' . $broadcast_id . '/messages';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -172,12 +135,8 @@ class Broadcast extends CustomerIOAppModel {
      */
 
     public function getBroadcastAction($broadcast_id, $action_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'broadcasts/' . $broadcast_id . '/actions/' . $action_id;
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'broadcasts/' . $broadcast_id . '/actions/' . $action_id;
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -188,13 +147,8 @@ class Broadcast extends CustomerIOAppModel {
      */
 
     public function updateBroadcastAction($broadcast_id, $action_id, $data) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'broadcasts/' . $broadcast_id . '/actions/' . $action_id;
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY'],
-            'content-type: application/json'
-        );
-
+        $url = $this->getBetaAPIURL() . 'broadcasts/' . $broadcast_id . '/actions/' . $action_id;
+        $header = $this->getHeaderAuthBearerJson();
         $request = json_decode($this->cURLPut($url, $header, $data));
         return $request;
     }
@@ -207,12 +161,8 @@ class Broadcast extends CustomerIOAppModel {
      */
 
     public function getBroadcastActionMetrics($broadcast_id, $action_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'broadcasts/' . $broadcast_id . '/actions/' . $action_id . '/metrics';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'broadcasts/' . $broadcast_id . '/actions/' . $action_id . '/metrics';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -224,12 +174,8 @@ class Broadcast extends CustomerIOAppModel {
      */
 
     public function getBroadcastActionLinkMetrics($broadcast_id, $action_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'broadcasts/' . $broadcast_id . '/actions/' . $action_id . '/metrics/links';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'broadcasts/' . $broadcast_id . '/actions/' . $action_id . '/metrics/links';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -240,12 +186,8 @@ class Broadcast extends CustomerIOAppModel {
      */
 
     public function getBroadcastTriggers($broadcast_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'broadcasts/' . $broadcast_id . '/triggers';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'broadcasts/' . $broadcast_id . '/triggers';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
