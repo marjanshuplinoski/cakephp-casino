@@ -19,12 +19,8 @@ class Snippet extends CustomerIOAppModel {
      */
 
     public function listSnippets() {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'snippets';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'snippets';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -35,14 +31,9 @@ class Snippet extends CustomerIOAppModel {
      */
 
     public function updateSnippets($data) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'snippets';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY'],
-            'content-type: application/json'
-        );
-
-        $request = json_decode($this->cURLPut($url, $header, $data));
+        $url = $this->getBetaAPIURL() . 'snippets';
+        $header = $this->getHeaderAuthBearerJson();
+        $request = json_decode($this->cURLPut($url, $header, json_encode($data)));
         return $request;
     }
 
@@ -52,12 +43,9 @@ class Snippet extends CustomerIOAppModel {
      */
 
     public function deleteSnippet($snippet_name) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'snippets/' . $snippet_name;
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'snippets/' . $snippet_name;
+        $url = str_replace(" ","%20",$url);
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLDelete($url, $header));
         return $request;
     }

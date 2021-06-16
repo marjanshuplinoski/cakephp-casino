@@ -123,6 +123,10 @@
 	Router::connect('/CustomerIO/SenderIdentities/listSenderIdentities', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'SenderIdentities','action'=>'listSenderIdentities'));
 	Router::connect('/CustomerIO/SenderIdentities/getSender', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'SenderIdentities','action'=>'getSender'));
 	Router::connect('/CustomerIO/SenderIdentities/getSenderUsageData', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'SenderIdentities','action'=>'getSenderUsageData'));
+	//Snippets
+	Router::connect('/CustomerIO/Snippets/listSnippets', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Snippets','action'=>'listSnippets'));
+	Router::connect('/CustomerIO/Snippets/updateSnippets', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Snippets','action'=>'updateSnippets'));
+	Router::connect('/CustomerIO/Snippets/deleteSnippet', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Snippets','action'=>'deleteSnippet'));
 
 
 /**
