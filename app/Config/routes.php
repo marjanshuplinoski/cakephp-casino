@@ -87,6 +87,12 @@
 	Router::connect('/CustomerIO/Events/trackCustomerEvent', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Events','action'=>'trackCustomerEvent'));
 	Router::connect('/CustomerIO/Events/trackAnonymousEvent', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Events','action'=>'trackAnonymousEvent'));
 	Router::connect('/CustomerIO/Events/reportPushEvent', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Events','action'=>'reportPushEvent'));
+	//Exports
+	Router::connect('/CustomerIO/Exports/listExports', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Exports','action'=>'listExports'));
+	Router::connect('/CustomerIO/Exports/getExport', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Exports','action'=>'getExport'));
+	Router::connect('/CustomerIO/Exports/downloadExport', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Exports','action'=>'downloadExport'));
+	Router::connect('/CustomerIO/Exports/exportCustomerData', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Exports','action'=>'exportCustomerData'));
+	Router::connect('/CustomerIO/Exports/exportInfoAboutDeliveries', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Exports','action'=>'exportInfoAboutDeliveries'));
 
 
 

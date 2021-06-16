@@ -19,12 +19,8 @@ class Export extends CustomerIOAppModel {
      */
 
     public function listExports() {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'exports';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'exports';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -35,12 +31,8 @@ class Export extends CustomerIOAppModel {
      */
 
     public function getExport($export_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'exports/' . $export_id;
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'exports/' . $export_id;
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -51,12 +43,8 @@ class Export extends CustomerIOAppModel {
      */
 
     public function downloadExport($export_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'exports/' . $export_id . '/download';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'exports/' . $export_id . '/download';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -67,14 +55,9 @@ class Export extends CustomerIOAppModel {
      */
 
     public function exportCustomerData($data) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'exports/customers';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY'],
-            'content-type: application/json'
-        );
-
-        $request = json_decode($this->cURLPost($url, $header, $data));
+        $url = $this->getBetaAPIURL() . 'exports/customers';
+        $header = $this->getHeaderAuthBearerJson();
+        $request = json_decode($this->cURLPost($url, $header, json_encode($data)));
         return $request;
     }
 
@@ -85,13 +68,8 @@ class Export extends CustomerIOAppModel {
      */
 
     public function exportInfoAboutDeliveries($data) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'exports/deliveries';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY'],
-            'content-type: application/json'
-        );
-
+        $url = $this->getBetaAPIURL(). 'exports/deliveries';
+        $header = $this->getHeaderAuthBearerJson();
         $request = json_decode($this->cURLPost($url, $header, $data));
         return $request;
     }
