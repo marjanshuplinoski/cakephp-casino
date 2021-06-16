@@ -98,6 +98,17 @@
 	Router::connect('/CustomerIO/Messages/listMessages', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'listMessages'));
 	Router::connect('/CustomerIO/Messages/getMessage', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'getMessage'));
 	Router::connect('/CustomerIO/Messages/getArchivedMessage', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'getArchivedMessage'));
+	//Newsletters
+	Router::connect('/CustomerIO/Newsletters/listNewsletters', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'listNewsletters'));
+	Router::connect('/CustomerIO/Newsletters/getNewsletter', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'getNewsletter'));
+	Router::connect('/CustomerIO/Newsletters/getNewsletterMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'getNewsletterMetrics'));
+	Router::connect('/CustomerIO/Newsletters/getNewsletterLinkMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'getNewsletterLinkMetrics'));
+	Router::connect('/CustomerIO/Newsletters/listNewsletterVariants', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'listNewsletterVariants'));
+	Router::connect('/CustomerIO/Newsletters/getNewsletterMessageMetadata', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'getNewsletterMessageMetadata'));
+	Router::connect('/CustomerIO/Newsletters/getNewsletterVariant', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'getNewsletterVariant'));
+	Router::connect('/CustomerIO/Newsletters/updateNewsletterVariant', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'updateNewsletterVariant'));
+	Router::connect('/CustomerIO/Newsletters/getMetricsForVariant', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'getMetricsForVariant'));
+	Router::connect('/CustomerIO/Newsletters/getNewsletterVariantLinkMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'getNewsletterVariantLinkMetrics'));
 
 
 
