@@ -20,14 +20,9 @@ class Event extends CustomerIOAppModel {
      */
 
     public function trackCustomerEvent($identifier, $data) {
-        $url = $this->config['Config']['US']['TRACK_API_URL'] . 'customers/' . $identifier . '/events';
-
-        $header = array(
-            'Authorization: Basic ' . base64_encode($this->config['Config']['SITE_ID'] . ':' . $this->config['Config']['API_KEY']),
-            'content-type: application/json'
-        );
-
-        $request = json_decode($this->cURLPost($url, $header, $data));
+        $url = $this->getTrackAPIURL() . 'customers/' . $identifier . '/events';
+        $header = $this->getHeaderAuthBasicJson();
+        $request = json_decode($this->cURLPost($url, $header, json_encode($data)));
         return $request;
     }
 
@@ -39,14 +34,9 @@ class Event extends CustomerIOAppModel {
      */
 
     public function trackAnonymousEvent($data) {
-        $url = $this->config['Config']['US']['TRACK_API_URL'] . 'events';
-
-        $header = array(
-            'Authorization: Basic ' . base64_encode($this->config['Config']['SITE_ID'] . ':' . $this->config['Config']['API_KEY']),
-            'content-type: application/json'
-        );
-
-        $request = json_decode($this->cURLPost($url, $header, $data));
+        $url = $this->getTrackAPIURL() . 'events';
+        $header = $this->getHeaderAuthBasicJson();
+        $request = json_decode($this->cURLPost($url, $header, json_encode($data)));
         return $request;
     }
 
@@ -58,17 +48,12 @@ class Event extends CustomerIOAppModel {
      */
 
     public function reportPushEvent($data) {
-        $url = $this->config['Config']['US']['GENERAL_API_URL'] . 'push/events';
-
-        $header = array(
-            'Authorization: Basic ' . base64_encode($this->config['Config']['SITE_ID'] . ':' . $this->config['Config']['API_KEY']),
-            'content-type: application/json'
-        );
-
+        $url = $this->getGeneralAPIURL() . 'push/events';
+        $header = $this->getHeaderAuthBasicJson();
         $request = json_decode($this->cURLPost($url, $header, $data));
         return $request;
     }
-    
+
       //TRACK API END
 
 }

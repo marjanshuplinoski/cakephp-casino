@@ -83,6 +83,10 @@
 	Router::connect('/CustomerIO/Collections/updateCollection', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Collections','action'=>'updateCollection'));
 	Router::connect('/CustomerIO/Collections/lookupCollectionContents', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Collections','action'=>'lookupCollectionContents'));
 	Router::connect('/CustomerIO/Collections/updateContentsOfCollection', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Collections','action'=>'updateContentsOfCollection'));
+	//Events
+	Router::connect('/CustomerIO/Events/trackCustomerEvent', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Events','action'=>'trackCustomerEvent'));
+	Router::connect('/CustomerIO/Events/trackAnonymousEvent', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Events','action'=>'trackAnonymousEvent'));
+	Router::connect('/CustomerIO/Events/reportPushEvent', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Events','action'=>'reportPushEvent'));
 
 
 
