@@ -93,6 +93,11 @@
 	Router::connect('/CustomerIO/Exports/downloadExport', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Exports','action'=>'downloadExport'));
 	Router::connect('/CustomerIO/Exports/exportCustomerData', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Exports','action'=>'exportCustomerData'));
 	Router::connect('/CustomerIO/Exports/exportInfoAboutDeliveries', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Exports','action'=>'exportInfoAboutDeliveries'));
+	//Messages
+	Router::connect('/CustomerIO/Messages/sendTransactionalEmail', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'sendTransactionalEmail'));
+	Router::connect('/CustomerIO/Messages/listMessages', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'listMessages'));
+	Router::connect('/CustomerIO/Messages/getMessage', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'getMessage'));
+	Router::connect('/CustomerIO/Messages/getArchivedMessage', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'getArchivedMessage'));
 
 
 

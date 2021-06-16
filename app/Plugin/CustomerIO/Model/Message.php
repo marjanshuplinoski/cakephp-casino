@@ -20,14 +20,9 @@ class Message extends CustomerIOAppModel {
      */
 
     public function sendTransactionalEmail($data) {
-        $url = $this->config['Config']['US']['APP_API_URL'] . 'send/email';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY'],
-            'content-type: application/json'
-        );
-
-        $request = json_decode($this->cURLPost($url, $header, $data));
+        $url = $this->getAPPAPIURL() . 'send/email';
+        $header = $this->getHeaderAuthBearerJson();
+        $request = json_decode($this->cURLPost($url, $header, json_encode($data)));
         return $request;
     }
 
@@ -40,12 +35,8 @@ class Message extends CustomerIOAppModel {
      */
 
     public function listMessages() {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'messages';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'messages';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -56,12 +47,8 @@ class Message extends CustomerIOAppModel {
      */
 
     public function getMessage($message_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'messages/' . $message_id;
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'messages/' . $message_id;
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -73,12 +60,8 @@ class Message extends CustomerIOAppModel {
      */
 
     public function getArchivedMessage($message_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'messages/' . $message_id . '/archived_message';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'messages/' . $message_id . '/archived_message';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
