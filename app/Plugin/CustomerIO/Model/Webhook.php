@@ -20,14 +20,9 @@ class Webhook extends CustomerIOAppModel {
      */
 
     public function reportingWebhook($data) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'reporting_webhooks';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY'],
-            'content-type: application/json'
-        );
-
-        $request = json_decode($this->cURLPost($url, $header, $data));
+        $url = $this->getBetaAPIURL() . 'reporting_webhooks';
+        $header = $this->getHeaderAuthBearerJson();
+        $request = json_decode($this->cURLPost($url, $header, json_encode($data)));
         return $request;
     }
 
@@ -37,12 +32,8 @@ class Webhook extends CustomerIOAppModel {
      */
 
     public function listReportingWebhooks() {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'reporting_webhooks';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'reporting_webhooks';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -53,12 +44,8 @@ class Webhook extends CustomerIOAppModel {
      */
 
     public function getReportingWebhook($webhook_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'reporting_webhooks/' . $webhook_id;
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'reporting_webhooks/' . $webhook_id;
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -69,13 +56,9 @@ class Webhook extends CustomerIOAppModel {
      */
 
     public function updateWebhookConfig($webhook_id, $data) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'reporting_webhooks/' . $webhook_id;
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
-        $request = json_decode($this->cURLPut($url, $header, $data));
+        $url = $this->getBetaAPIURL() . 'reporting_webhooks/' . $webhook_id;
+        $header = $this->getHeaderAuthBearerJson();
+        $request = json_decode($this->cURLPut($url, $header, json_encode($data)));
         return $request;
     }
 
@@ -85,12 +68,8 @@ class Webhook extends CustomerIOAppModel {
      */
 
     public function deleteReportingWebhook($webhook_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'reporting_webhooks/' . $webhook_id;
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'reporting_webhooks/' . $webhook_id;
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLDelete($url, $header));
         return $request;
     }

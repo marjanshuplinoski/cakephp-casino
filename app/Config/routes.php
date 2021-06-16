@@ -127,6 +127,12 @@
 	Router::connect('/CustomerIO/Snippets/listSnippets', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Snippets','action'=>'listSnippets'));
 	Router::connect('/CustomerIO/Snippets/updateSnippets', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Snippets','action'=>'updateSnippets'));
 	Router::connect('/CustomerIO/Snippets/deleteSnippet', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Snippets','action'=>'deleteSnippet'));
+	//WebHooks
+	Router::connect('/CustomerIO/Webhooks/reportingWebhook', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Webhooks','action'=>'reportingWebhook'));
+	Router::connect('/CustomerIO/Webhooks/listReportingWebhooks', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Webhooks','action'=>'listReportingWebhooks'));
+	Router::connect('/CustomerIO/Webhooks/getReportingWebhook', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Webhooks','action'=>'getReportingWebhook'));
+	Router::connect('/CustomerIO/Webhooks/updateWebhookConfig', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Webhooks','action'=>'updateWebhookConfig'));
+	Router::connect('/CustomerIO/Webhooks/deleteReportingWebhook', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Webhooks','action'=>'deleteReportingWebhook'));
 
 
 /**
