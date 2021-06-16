@@ -21,14 +21,9 @@ class Segment extends CustomerIOAppModel {
      */
 
     public function addSegment($segment_id, $data) {
-        $url = $this->config['Config']['US']['TRACK_API_URL'] . 'segments/' . $segment_id . '/add_customers';
-
-        $header = array(
-            'Authorization: Basic ' . base64_encode($this->config['Config']['SITE_ID'] . ':' . $this->config['Config']['API_KEY']),
-            'content-type: application/json'
-        );
-
-        $request = json_decode($this->cURLPost($url, $header, $data));
+        $url = $this->getTrackAPIURL() . 'segments/' . $segment_id . '/add_customers';
+        $header = $this->getHeaderAuthBasicJson();
+        $request = json_decode($this->cURLPost($url, $header, json_encode($data)));
         return $request;
     }
 
@@ -38,14 +33,9 @@ class Segment extends CustomerIOAppModel {
      */
 
     public function removeSegment($segment_id, $data) {
-        $url = $this->config['Config']['US']['TRACK_API_URL'] . 'segments/' . $segment_id . '/remove_customers';
-
-        $header = array(
-            'Authorization: Basic ' . base64_encode($this->config['Config']['SITE_ID'] . ':' . $this->config['Config']['API_KEY']),
-            'content-type: application/json'
-        );
-
-        $request = json_decode($this->cURLPost($url, $header, $data));
+        $url = $this->getTrackAPIURL() . 'segments/' . $segment_id . '/remove_customers';
+        $header = $this->getHeaderAuthBasicJson();
+        $request = json_decode($this->cURLPost($url, $header, json_encode($data)));
         return $request;
     }
 
@@ -57,13 +47,9 @@ class Segment extends CustomerIOAppModel {
      */
 
     public function createManualSegment($data) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'segments';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
-        $request = json_decode($this->cURLPost($url, $header, $data));
+        $url = $this->getBetaAPIURL() . 'segments';
+        $header = $this->getHeaderAuthBearer();
+        $request = json_decode($this->cURLPost($url, $header, json_encode($data)));
         return $request;
     }
 
@@ -73,12 +59,8 @@ class Segment extends CustomerIOAppModel {
      */
 
     public function listSegments() {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'segments';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'segments';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -89,12 +71,8 @@ class Segment extends CustomerIOAppModel {
      */
 
     public function getSegment($segment_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'segments';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'segments/'.$segment_id;
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -105,12 +83,8 @@ class Segment extends CustomerIOAppModel {
      */
 
     public function deleteSegment($segment_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'segments/' . $segment_id;
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'segments/' . $segment_id;
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLDelete($url, $header));
         return $request;
     }
@@ -121,12 +95,8 @@ class Segment extends CustomerIOAppModel {
      */
 
     public function getSegmentDependencies($segment_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'segments/' . $segment_id . '/used_by';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'segments/' . $segment_id . '/used_by';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -137,12 +107,8 @@ class Segment extends CustomerIOAppModel {
      */
 
     public function getSegmentCustomerCount($segment_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'segments/' . $segment_id . '/customer_count';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'segments/' . $segment_id . '/customer_count';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -153,12 +119,8 @@ class Segment extends CustomerIOAppModel {
      */
 
     public function listCustomersInSegment($segment_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'segments/' . $segment_id . '/membership';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'segments/' . $segment_id . '/membership';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }

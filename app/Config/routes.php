@@ -109,7 +109,16 @@
 	Router::connect('/CustomerIO/Newsletters/updateNewsletterVariant', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'updateNewsletterVariant'));
 	Router::connect('/CustomerIO/Newsletters/getMetricsForVariant', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'getMetricsForVariant'));
 	Router::connect('/CustomerIO/Newsletters/getNewsletterVariantLinkMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'getNewsletterVariantLinkMetrics'));
-
+	//
+	Router::connect('/CustomerIO/Segments/addSegment', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'addSegment'));
+	Router::connect('/CustomerIO/Segments/removeSegment', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'removeSegment'));
+	Router::connect('/CustomerIO/Segments/createManualSegment', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'createManualSegment'));
+	Router::connect('/CustomerIO/Segments/listSegments', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'listSegments'));
+	Router::connect('/CustomerIO/Segments/getSegment', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'getSegment'));
+	Router::connect('/CustomerIO/Segments/deleteSegment', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'deleteSegment'));
+	Router::connect('/CustomerIO/Segments/getSegmentDependencies', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'getSegmentDependencies'));
+	Router::connect('/CustomerIO/Segments/getSegmentCustomerCount', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'getSegmentCustomerCount'));
+	Router::connect('/CustomerIO/Segments/listCustomersInSegment', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'listCustomersInSegment'));
 
 
 /**
