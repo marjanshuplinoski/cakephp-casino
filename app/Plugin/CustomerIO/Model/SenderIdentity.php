@@ -20,12 +20,8 @@ class SenderIdentity extends CustomerIOAppModel {
      */
 
     public function listSenderIdentities() {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'sender_identities';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'sender_identities';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -36,12 +32,8 @@ class SenderIdentity extends CustomerIOAppModel {
      */
 
     public function getSender($sender_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'sender_identities/' . $sender_id;
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'sender_identities/' . $sender_id;
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }
@@ -52,12 +44,8 @@ class SenderIdentity extends CustomerIOAppModel {
      */
 
     public function getSenderUsageData($sender_id) {
-        $url = $this->config['Config']['US']['BETA_API_URL'] . 'sender_identities/' . $sender_id . '/used_by';
-
-        $header = array(
-            'Authorization: Bearer ' . $this->config['Config']['BETA_API_KEY']
-        );
-
+        $url = $this->getBetaAPIURL() . 'sender_identities/' . $sender_id . '/used_by';
+        $header = $this->getHeaderAuthBearer();
         $request = json_decode($this->cURLGet($url, $header));
         return $request;
     }

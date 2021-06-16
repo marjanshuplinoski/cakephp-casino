@@ -109,7 +109,7 @@
 	Router::connect('/CustomerIO/Newsletters/updateNewsletterVariant', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'updateNewsletterVariant'));
 	Router::connect('/CustomerIO/Newsletters/getMetricsForVariant', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'getMetricsForVariant'));
 	Router::connect('/CustomerIO/Newsletters/getNewsletterVariantLinkMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'getNewsletterVariantLinkMetrics'));
-	//
+	//Segments
 	Router::connect('/CustomerIO/Segments/addSegment', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'addSegment'));
 	Router::connect('/CustomerIO/Segments/removeSegment', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'removeSegment'));
 	Router::connect('/CustomerIO/Segments/createManualSegment', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'createManualSegment'));
@@ -119,6 +119,10 @@
 	Router::connect('/CustomerIO/Segments/getSegmentDependencies', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'getSegmentDependencies'));
 	Router::connect('/CustomerIO/Segments/getSegmentCustomerCount', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'getSegmentCustomerCount'));
 	Router::connect('/CustomerIO/Segments/listCustomersInSegment', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Segments','action'=>'listCustomersInSegment'));
+	//SenderIdentities
+	Router::connect('/CustomerIO/SenderIdentities/listSenderIdentities', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'SenderIdentities','action'=>'listSenderIdentities'));
+	Router::connect('/CustomerIO/SenderIdentities/getSender', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'SenderIdentities','action'=>'getSender'));
+	Router::connect('/CustomerIO/SenderIdentities/getSenderUsageData', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'SenderIdentities','action'=>'getSenderUsageData'));
 
 
 /**
