@@ -117,25 +117,21 @@ class CampaignsController extends CustomerIOAppController
 		//test data
 		$campaign_id = 1;
 		$action_id = 3;
-		$data = array('created' => 1622543501,
-			'updated' => 1622543501,
-			'body' => 'string',
-			'sending_state' => 'draft',
-			'from_id' => NULL,
-			'reply_to_id' => NULL,
-			'recipient' => 'replyto@example.com',
-			'subject' => 'Testing campaign',
-			'headers' =>
+		$body = 'string';
+		$sending_state = 'automatic';
+		$from_id = NULL;
+		$reply_to_id = NULL;
+		$recipient = 'test@example.com';
+		$subject = 'New subject';
+		$headers = array(
+			0 =>
 				array(
-					0 =>
-						array(
-							'property1' => 'string',
-							'property2' => 'string',
-						),
-				),
+					'property1' => 'string',
+					'property2' => 'string'
+				)
 		);
 
-		$response = $this->Campaign->updateCampaignAction($campaign_id, $action_id, $data);
+		$response = $this->Campaign->updateCampaignAction($campaign_id, $action_id,  $body, $sending_state, $from_id, $reply_to_id, $recipient, $subject, $headers);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;

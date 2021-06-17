@@ -112,10 +112,22 @@ class Campaign extends CustomerIOAppModel
 	 * Update the contents of a campaign action, including the body of messages and HTTP requests.
 	 */
 
-	public function updateCampaignAction($campaign_id, $action_id, $data)
+	public function updateCampaignAction($campaign_id, $action_id, $body, $sending_state, $from_id, $reply_to_id, $recipient, $subject, $headers)
 	{
 		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/actions/' . $action_id;
 		$header = $this->getHeaderAuthBearerJson();
+		$data = array(
+			'created' => time(),
+			'updated' => time(),
+			'body' => $body,
+			'sending_state' => $sending_state,
+			'from_id' => $from_id,
+			'reply_to_id' => $reply_to_id,
+			'recipient' => $recipient,
+			'subject' => $subject,
+			'headers' =>
+				$headers
+		);
 		$request = json_decode($this->cURLPut($url, $header, json_encode($data)));
 		return $request;
 	}
