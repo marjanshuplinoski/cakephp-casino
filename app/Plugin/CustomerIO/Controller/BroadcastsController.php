@@ -40,9 +40,17 @@ class BroadcastsController extends CustomerIOAppController
 	{
 		//test data
 		$broadcast_id = 7;
-		$data = array('recipients' => array('and' => array(0 => array('segment' => array('id' => 3,),), 1 => array('or' => array(0 => array('attribute' => array('field' => 'interest', 'operator' => 'eq', 'value' => 'roadrunners',),), 1 => array('attribute' => array('field' => 'state', 'operator' => 'eq', 'value' => 'NM',),), 2 => array('not' => array('attribute' => array('field' => 'species', 'operator' => 'eq', 'value' => 'roadrunners',),),),),),),), 'data' => array('headline' => 'Roadrunner spotted in Albuquerque!', 'date' => 1511315635, 'text' => 'We received reports of a roadrunner in your immediate area! Head to your dashboard to view more information!',),);
+		$segmentID = 3;
+		$orField = "interest";
+		$orField2 = "roadrunners";
+		$orValue = "state";
+		$orValue2 = "NM";
+		$orNotField = "species";
+		$orNotValue = "roadrunners";
+		$dataHeadline = "Roadrunner spotted in Albuquerque!!!!";
+		$dataText = "We received reports of a roadrunner in your immediate area! Head to your dashboard to view more information";
 
-		$response = $this->Broadcast->triggerBroadcast($broadcast_id, json_encode($data));
+		$response = $this->Broadcast->triggerBroadcast($broadcast_id, $segmentID, $orField, $orField2, $orValue, $orValue2, $orNotField, $orNotValue, $dataHeadline, $dataText);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -145,25 +153,21 @@ class BroadcastsController extends CustomerIOAppController
 		//test data
 		$broadcast_id = 7;
 		$action_id = 41;
-		$data = array(
-			'created' => 1552341937,
-			'updated' => 1552341937,
-			'body' => 'string',
-			'sending_state' => 'automatic',
-			'from_id' => NULL,
-			'reply_to_id' => NULL,
-			'recipient' => 'test@example.com',
-			'subject' => 'New subject',
-			'headers' =>
+		$body = 'string';
+		$sending_state = 'automatic';
+		$from_id = NULL;
+		$reply_to_id = NULL;
+		$recipient = 'test@example.com';
+		$subject = 'New subject';
+		$headers = array(
+			0 =>
 				array(
-					0 =>
-						array(
-							'property1' => 'string',
-							'property2' => 'string',
-						),
-				),
+					'property1' => 'string',
+					'property2' => 'string'
+				)
 		);
-		$response = $this->Broadcast->updateBroadcastAction($broadcast_id, $action_id, json_encode($data));
+
+		$response = $this->Broadcast->updateBroadcastAction($broadcast_id, $action_id, $body, $sending_state, $from_id, $reply_to_id, $recipient, $subject, $headers);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;

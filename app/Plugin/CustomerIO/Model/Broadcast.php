@@ -21,10 +21,53 @@ class Broadcast extends CustomerIOAppModel {
      * properties in the data object from this request using liquid—{{trigger.<property_in_data_obj>}}.
      */
 
-    public function triggerBroadcast($broadcast_id, $data) {
+    public function triggerBroadcast($broadcast_id, $segmentID, $orField, $orField2, $orValue, $orValue2, $orNotField, $orNotValue, $dataHeadline, $dataText) {
         $url = $this->getAPPAPIURL() . '/campaigns/' . $broadcast_id . '/triggers';
         $header = $this->getHeaderAuthBearerJson();
-        $request = json_decode($this->cURLPost($url, $header, $data));
+        $data = array(
+			"recipients" => array(
+				"and" => array(
+					"0" => array(
+						"segment" => array(
+							"id" => $segmentID
+						)
+					),
+					"1" => array(
+						"or" => array(
+							"0" => array(
+								"attribute" => array(
+									"field" => $orField,
+									"operator" => "eq",
+									"value" => $orValue
+								)
+							),
+							"1" => array(
+								"attribute" => array(
+									"field" => $orField2,
+									"operator" => "eq",
+									"value" => $orValue2
+								)
+							),
+							"2" => array(
+								"not" => array(
+									"attribute" => array(
+										"field" => $orNotField,
+										"operator" => "eq",
+										"value" => $orNotValue
+									)
+								)
+							)
+						)
+					)
+				)
+			),
+			"data" => array(
+				"headline" => $dataHeadline,
+				"date" => time(),
+				"text" => $dataText
+			)
+		);
+        $request = json_decode($this->cURLPost($url, $header, json_encode($data)));
         return $request;
     }
 
@@ -146,10 +189,22 @@ class Broadcast extends CustomerIOAppModel {
      * Update the contents of a broadcast action, including the body of messages or HTTP requests.
      */
 
-    public function updateBroadcastAction($broadcast_id, $action_id, $data) {
+    public function updateBroadcastAction($broadcast_id, $action_id, $body, $sending_state, $from_id, $reply_to_id, $recipient, $subject, $headers) {
         $url = $this->getBetaAPIURL() . 'broadcasts/' . $broadcast_id . '/actions/' . $action_id;
         $header = $this->getHeaderAuthBearerJson();
-        $request = json_decode($this->cURLPut($url, $header, $data));
+		$data = array(
+			'created' => time(),
+			'updated' => time(),
+			'body' => $body,
+			'sending_state' => $sending_state,
+			'from_id' => $from_id,
+			'reply_to_id' => $reply_to_id,
+			'recipient' => $recipient,
+			'subject' => $subject,
+			'headers' =>
+				$headers
+		);
+        $request = json_decode($this->cURLPut($url, $header, json_encode($data)));
         return $request;
     }
 
