@@ -38,16 +38,13 @@ class EventsController extends CustomerIOAppController
 	{
 		//test data
 		$identifier = "player3@example.com";
-		$data = array(
-			'name' => 'purchase',
-			'data' =>
-				array(
-					'price' => 231.45,
-					'product' => 'shoes',
-				),
+		$name = 'purchase';
+		$dataEvent = array(
+			'price' => 231.45,
+			'product' => 'shoes',
 		);
 
-		$response = $this->Event->trackCustomerEvent($identifier, $data);
+		$response = $this->Event->trackCustomerEvent($identifier, $name, $dataEvent);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -56,16 +53,13 @@ class EventsController extends CustomerIOAppController
 	public function trackAnonymousEvent()
 	{
 		//test data
-		$data = array(
-			'name' => 'purchase',
-			'data' =>
-				array(
-					'price' => 111.45,
-					'product' => 'shoes',
-				),
+		$name = 'purchase';
+		$dataEvent = array(
+			'price' => 231.45,
+			'product' => 'shoes',
 		);
 
-		$response = $this->Event->trackAnonymousEvent($data);
+		$response = $this->Event->trackAnonymousEvent($dataEvent);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -74,14 +68,11 @@ class EventsController extends CustomerIOAppController
 	public function reportPushEvent()
 	{
 		//test data
-		$data = array(
-			'delivery_id' => '11RPILAgUBcRhIBqSfeiIwdIYJKxTY',
-			'event' => 'opened',
-			'device_id' => 'CIO-Delivery-Token from the notification',
-			'timestamp' => time(),
-		);
+		$delivery_id = '11RPILAgUBcRhIBqSfeiIwdIYJKxTY';
+		$event = 'opened';
+		$device_id = 'CIO-Delivery-Token from the notification';
 
-		$response = $this->Event->reportPushEvent($data);
+		$response = $this->Event->reportPushEvent($delivery_id, $event, $device_id);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;

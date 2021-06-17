@@ -19,9 +19,13 @@ class Event extends CustomerIOAppModel {
      * Use this endpoint to track events outside of a browser or directly from your server-side code.
      */
 
-    public function trackCustomerEvent($identifier, $data) {
+    public function trackCustomerEvent($identifier, $name, $dataEvent ) {
         $url = $this->getTrackAPIURL() . 'customers/' . $identifier . '/events';
         $header = $this->getHeaderAuthBasicJson();
+		$data = array(
+			'name' => $name ,
+			'data' => $dataEvent
+		);
         $request = json_decode($this->cURLPost($url, $header, json_encode($data)));
         return $request;
     }
@@ -33,9 +37,13 @@ class Event extends CustomerIOAppModel {
      * send invitation emails to people who aren't yet in your workspace.
      */
 
-    public function trackAnonymousEvent($data) {
+    public function trackAnonymousEvent($name,$dataEvent) {
         $url = $this->getTrackAPIURL() . 'events';
         $header = $this->getHeaderAuthBasicJson();
+        $data = array(
+			'name' => $name ,
+			'data' => $dataEvent
+		);
         $request = json_decode($this->cURLPost($url, $header, json_encode($data)));
         return $request;
     }
@@ -47,9 +55,15 @@ class Event extends CustomerIOAppModel {
      * or associating metrics with a specific message, unless you report them back to us.
      */
 
-    public function reportPushEvent($data) {
+    public function reportPushEvent($delivery_id, $event, $device_id) {
         $url = $this->getGeneralAPIURL() . 'push/events';
         $header = $this->getHeaderAuthBasicJson();
+		$data = array(
+			'delivery_id' => $delivery_id,
+			'event' => $event,
+			'device_id' => $device_id,
+			'timestamp' => time()
+		);
         $request = json_decode($this->cURLPost($url, $header, $data));
         return $request;
     }
