@@ -30,34 +30,30 @@ class MessagesController extends CustomerIOAppController
 	{
 		$this->autoRender = false;
 		$this->layout = 'ajax';
-		$this->Auth->allow('sendTransactionalEmail', 'listMessages','getMessage','getArchivedMessage');
+		$this->Auth->allow('sendTransactionalEmail', 'listMessages', 'getMessage', 'getArchivedMessage');
 		parent::beforeFilter();
 	}
 
 	public function sendTransactionalEmail()
 	{
 		//test data
-		$data = array(
-			'transactional_message_id' => 2,
-			'to' => 'player3@example.com',
-			'identifiers' =>
-				array(
-					'id' => 12345,
-				),
-			'message_data' =>
-				array(
-					'password_reset_token' => 'abcde-12345-fghij-d888',
-					'account_id' => '123dj',
-				),
-			'bcc' => 'bcc@example.com',
-			'disable_message_retention' => false,
-			'send_to_unsubscribed' => true,
-			'tracked' => true,
-			'queue_draft' => false,
-			'disable_css_preprocessing' => true,
+		$transactional_msg_id = 2;
+		$to = 'player3@example.com';
+		$identifier = array(
+			'id' => 12345,
 		);
+		$message_data = array(
+			'password_reset_token' => 'abcde-12345-fghij-d888',
+			'account_id' => '123dj',
+		);
+		$bcc = 'bcc@example.com';
+		$disable_message_retention = false;
+		$send_to_unsubscribed = true;
+		$tracked = true;
+		$queue_draft = false;
+		$disable_css_preprocessing = true;
 
-		$response = $this->Message->sendTransactionalEmail($data);
+		$response = $this->Message->sendTransactionalEmail($transactional_msg_id, $to, $identifier, $message_data, $bcc, $disable_message_retention, $send_to_unsubscribed, $tracked, $queue_draft, $disable_css_preprocessing);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -76,7 +72,7 @@ class MessagesController extends CustomerIOAppController
 	public function getMessage()
 	{
 		//test data
-		$message_id ='dgOHwQaHwQYCAAF6D2BVCgT59qVfVQrNwqE=';
+		$message_id = 'dgOHwQaHwQYCAAF6D2BVCgT59qVfVQrNwqE=';
 		$response = $this->Message->getMessage($message_id);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
@@ -86,7 +82,7 @@ class MessagesController extends CustomerIOAppController
 	public function getArchivedMessage()
 	{
 		//test data
-		$message_id ='dgOHwQaHwQYCAAF6D2BVCgT59qVfVQrNwqE=';
+		$message_id = 'dgOHwQaHwQYCAAF6D2BVCgT59qVfVQrNwqE=';
 		$response = $this->Message->getArchivedMessage($message_id);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
