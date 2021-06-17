@@ -112,10 +112,17 @@ class Newsletter extends CustomerIOAppModel
 	 * Update the contents of a newsletter variant, including the body of a newsletter.
 	 */
 
-	public function updateNewsletterVariant($newsletter_id, $contents_id, $data)
+	public function updateNewsletterVariant($newsletter_id, $contents_id, $body, $from_id, $reply_to_id, $recipient, $subject, $headers)
 	{
 		$url = $this->getBetaAPIURL() . 'newsletters/' . $newsletter_id . '/contents/' . $contents_id;
 		$header = $this->getHeaderAuthBearerJson();
+		$data = array(
+			'body' => $body,
+			'from_id' => $from_id,
+			'reply_to_id' => $reply_to_id,
+			'recipient' => $recipient,
+			'subject' => $subject,
+			'headers' => $headers);
 		$request = json_decode($this->cURLPut($url, $header, json_encode($data)));
 		return $request;
 	}

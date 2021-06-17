@@ -117,23 +117,20 @@ class NewslettersController extends CustomerIOAppController
 		//test data
 		$newsletter_id = 3;
 		$contents_id = 22;
-		$data = array (
-			'body' => '<strong>Hello from the API</strong>',
-			'from_id' => NULL,
-			'reply_to_id' => NULL,
-			'recipient' => 'example@mail.com',
-			'subject' => 'Did you get that thing I sent you?!!!???????',
-			'headers' =>
-				array (
-					0 =>
-						array (
-							'property1' => 'string',
-							'property2' => 'string',
-						),
+		$body = '<strong>Hello from the API</strong>';
+		$from_id = NULL;
+		$reply_to_id = NULL;
+		$recipient = 'example@mail.com';
+		$subject = 'Did you get that thing I sent you?!!!???????';
+		$headers = array(
+			0 =>
+				array(
+					'property1' => 'string',
+					'property2' => 'string',
 				),
 		);
 
-		$response = $this->Newsletter->updateNewsletterVariant($newsletter_id, $contents_id, $data);
+		$response = $this->Newsletter->updateNewsletterVariant($newsletter_id, $contents_id, $body, $from_id, $reply_to_id, $recipient, $subject, $headers);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
