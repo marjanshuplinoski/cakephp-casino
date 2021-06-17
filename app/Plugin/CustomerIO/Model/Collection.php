@@ -20,10 +20,14 @@ class Collection extends CustomerIOAppModel
 	 * Create a new collection and provide the data that you'll access from the collection or the url that you'll download the data from.
 	 */
 
-	public function createCollection($data)
+	public function createCollection($data, $name, $dataCollection)
 	{
 		$url = $this->getBetaAPIURL() . 'collections';
 		$header = $this->getHeaderAuthBearerJson();
+		$data = array(
+			'name' => $name,
+			'data' => $dataCollection
+		);
 		$request = json_decode($this->cURLPost($url, $header, json_encode($data)));
 		return $request;
 	}
@@ -75,10 +79,14 @@ class Collection extends CustomerIOAppModel
 	 * Update the name or contents of a collection. Updating the data or url for your collection fully replaces the contents of the collection.
 	 */
 
-	public function updateCollection($collection_id, $data)
+	public function updateCollection($collection_id, $name, $dataCollection)
 	{
 		$url = $this->getBetaAPIURL() . 'collections/' . $collection_id;
 		$header = $this->getHeaderAuthBearerJson();
+		$data = array(
+			'name' => $name,
+			'data' => $dataCollection
+		);
 		$request = json_decode($this->cURLPut($url, $header, json_encode($data)));
 		return $request;
 	}
@@ -104,10 +112,14 @@ class Collection extends CustomerIOAppModel
 	 * corresponding values. This request replaces the current contents of the collection entirely.
 	 */
 
-	public function updateContentsOfCollection($collection_id, $data)
+	public function updateContentsOfCollection($collection_id, $eventName)
 	{
 		$url = $this->getBetaAPIURL() . 'collections/' . $collection_id . '/content';
 		$header = $this->getHeaderAuthBearerJson();
+		$data = array(
+			'eventName' => $eventName,
+			'eventDate' => time(),
+		);
 		$request = json_decode($this->cURLPut($url, $header, json_encode($data)));
 		return $request;
 	}

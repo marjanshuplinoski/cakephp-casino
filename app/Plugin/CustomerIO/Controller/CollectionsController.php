@@ -30,26 +30,23 @@ class CollectionsController extends CustomerIOAppController
 	{
 		$this->autoRender = false;
 		$this->layout = 'ajax';
-		$this->Auth->allow('createCollection', 'listCollections', 'lookupCollection', 'deleteCollection', 'updateCollection', 'lookupCollectionContents','updateContentsOfCollection');
+		$this->Auth->allow('createCollection', 'listCollections', 'lookupCollection', 'deleteCollection', 'updateCollection', 'lookupCollectionContents', 'updateContentsOfCollection');
 		parent::beforeFilter();
 	}
 
 	public function createCollection()
 	{
 		//test data
-		$data = array(
-			'name' => 'testCollection',
-			'data' =>
+		$name = 'testCollection';
+		$dataCollection = array(
+			0 =>
 				array(
-					0 =>
-						array(
-							'eventName' => 'someEvent',
-							'eventDate' => time(),
-						),
+					'eventName' => 'someEvent',
+					'eventDate' => time(),
 				),
 		);
 
-		$response = $this->Collection->createCollection($data);
+		$response = $this->Collection->createCollection($name, $dataCollection);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -89,18 +86,15 @@ class CollectionsController extends CustomerIOAppController
 	{
 		//test data
 		$collection_id = 9;
-		$data = array(
-			'name' => 'TestName',
-			'data' =>
-				array(
-					0 =>
-						array(
-							'eventName' => "SomeEvent",
-							'eventDate' => time(),
-						),
-				),
-		);
-		$response = $this->Collection->updateCollection($collection_id, $data);
+		$name = 'TestName';
+		$dataCollection = array(
+							0 =>
+								array(
+									'eventName' => "SomeEvent",
+									'eventDate' => time(),
+								),
+						);
+		$response = $this->Collection->updateCollection($collection_id, $name,$dataCollection);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -121,11 +115,9 @@ class CollectionsController extends CustomerIOAppController
 	{
 		//test data
 		$collection_id = 9;
-		$data = array(
-							'eventName' => "SuperEvent",
-							'eventDate' => time(),
-						);
-		$response = $this->Collection->updateContentsOfCollection($collection_id, $data);
+		$eventName = "SuperEvent";
+
+		$response = $this->Collection->updateContentsOfCollection($collection_id, $eventName);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
