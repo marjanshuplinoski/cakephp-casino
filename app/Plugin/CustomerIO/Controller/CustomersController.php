@@ -32,7 +32,7 @@ class CustomersController extends CustomerIOAppController
 		$this->layout = 'ajax';
 		$this->Auth->allow('addUpdateCustomer', 'deleteCustomer', 'addUpdateCustomerDevice', 'deleteCustomerDevice', 'suppressCustomerProfile',
 			'unSuppressCustomerProfile', 'customerUnsubscribeHandling', 'getCustomersByEmail', 'searchForCustomers', 'lookupCustomerAttributes',
-			'listCustomersAndAttributes','lookupMessagesSentToCustomer','lookupCustomerSegments');
+			'listCustomersAndAttributes', 'lookupMessagesSentToCustomer', 'lookupCustomerSegments');
 		parent::beforeFilter();
 	}
 
@@ -67,14 +67,11 @@ class CustomersController extends CustomerIOAppController
 	{
 		//test data
 		$identifier = 888;
+		$device_id = "231a";
+		$device_platform = "ios";
+		$device_last_used = time();
 
-		$attributes = array(
-			"id" => "231a",
-			"platform" => "ios",
-			"last_used" => time()
-		);
-
-		$response = $this->Customer->addUpdateCustomerDevice($identifier, $attributes);
+		$response = $this->Customer->addUpdateCustomerDevice($identifier, $device_id, $device_platform, $device_last_used);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -118,9 +115,8 @@ class CustomersController extends CustomerIOAppController
 	{
 		//test data
 		$delivery_id = 888;
-		$data = array("unsubscribe" => "true");
-
-		$response = $this->Customer->customerUnsubscribeHandling($delivery_id, $data);
+		$unsubscribe = "true";
+		$response = $this->Customer->customerUnsubscribeHandling($delivery_id, $unsubscribe);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -141,10 +137,13 @@ class CustomersController extends CustomerIOAppController
 	{
 		//test data
 		$search_query = 'MD';
-		$data = array('filter' => array('and' => array(0 => array('and' => array(0 => array('segment' => array('id' => 'string',), 'attribute' => array('field' => 'unsubscribed', 'operator' => 'eq', 'value' => true,),),), 'or' => array(0 => array('segment' => array('id' => 'string',), 'attribute' => array('field' => 'unsubscribed', 'operator' => 'eq', 'value' => true,),),), 'not' => array('and' => array(0 => array('segment' => array('id' => 'string',), 'attribute' => array('field' => 'unsubscribed', 'operator' => 'eq', 'value' => true,),),), 'or' => array(0 => array('segment' => array('id' => 'string',), 'attribute' => array('field' => 'unsubscribed', 'operator' => 'eq', 'value' => true,),),), 'segment' => array('id' => 'string',), 'attribute' => array('field' => 'unsubscribed', 'operator' => 'eq', 'value' => true,),), 'segment' => array('id' => '1',), 'attribute' => array('field' => 'unsubscribed', 'operator' => 'eq', 'value' => true,),),),),);
-		$limit = 1;				// up to 1000 results per page
+		$andID = 1;
+		$orID = 1;
+		$notID = 1;
+		$orID2 = 1;
+		$limit = 1;
 
-		$response = $this->Customer->searchForCustomers($search_query, $limit, $data);
+		$response = $this->Customer->searchForCustomers($search_query, $limit, $andID, $orID, $notID, $orID2);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -164,9 +163,9 @@ class CustomersController extends CustomerIOAppController
 	public function listCustomersAndAttributes()
 	{
 		//test data
-		$data = array('ids' => array('test1','887'));		// up to 100 ids
+		$ids = array('test1', '887');         // up to 100 ids
 
-		$response = $this->Customer->listCustomersAndAttributes($data);
+		$response = $this->Customer->listCustomersAndAttributes($ids);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -175,7 +174,7 @@ class CustomersController extends CustomerIOAppController
 	public function lookupCustomerSegments()
 	{
 		//test data
-		$customer_id= 887;
+		$customer_id = 887;
 
 		$response = $this->Customer->lookupCustomerSegments($customer_id);
 		$response = json_decode(json_encode($response), true);
@@ -186,17 +185,18 @@ class CustomersController extends CustomerIOAppController
 	public function lookupMessagesSentToCustomer()
 	{
 		//test data
-		$customer_id= 887;
+		$customer_id = 887;
 
 		$response = $this->Customer->lookupMessagesSentToCustomer($customer_id);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
 	}
+
 	public function lookupCustomerActivities()
 	{
 		//test data
-		$customer_id= 887;
+		$customer_id = 887;
 
 		$response = $this->Customer->lookupCustomerActivities($customer_id);
 		$response = json_decode(json_encode($response), true);

@@ -57,17 +57,17 @@ class Customer extends CustomerIOAppModel
 	 *  or update devices for, a customer profile.
 	 */
 
-	public function addUpdateCustomerDevice($identifier, $attributes = array())
+	public function addUpdateCustomerDevice($identifier, $device_id, $device_platform, $device_last_used)
 	{
 		$url = $this->getTrackAPIURL() . 'customers/' . $identifier . '/devices';
 		$header = $this->getHeaderAuthBasicJson();
 		$data = array(
 			'device' =>
 				array(
-					'id' => $attributes['id'],
-					'platform' => $attributes['platform'],
-					'last_used' => $attributes['last_used'],
-				),
+					'id' => $device_id,
+					'platform' => $device_platform,
+					'last_used' => $device_last_used
+				)
 		);
 //        var_dump($data);
 //        die();
@@ -129,10 +129,11 @@ class Customer extends CustomerIOAppModel
 	 * when you use a custom subscription center.
 	 */
 
-	public function customerUnsubscribeHandling($delivery_id, $data)
+	public function customerUnsubscribeHandling($delivery_id, $unsubscribe)
 	{
 		$url = $this->getGeneralAPIURL() . 'unsubscribe/' . $delivery_id;
 		$header = $this->getHeaderJson();
+		$data = array("unsubscribe" => $unsubscribe);
 		$request = json_decode($this->cURLPost($url, $header, json_encode($data)));
 		return $request;
 	}
@@ -158,10 +159,84 @@ class Customer extends CustomerIOAppModel
 	 * If you want to return a larger set of people in a single request, you may want to use the /exports API instead.
 	 */
 
-	public function searchForCustomers($search_query, $limit, $data)
+	public function searchForCustomers($search_query, $limit, $andID, $orID, $notID, $orID2)
 	{
 		$url = $this->getBetaAPIURL() . 'customers?start=' . $search_query . '&limit=' . $limit;
 		$header = $this->getHeaderAuthBearerJson();
+		$data = array(
+			"filter" => array(
+				"and" => array(
+					"0" => array(
+						"and" => array(
+							"0" => array(
+								"segment" => array(
+									"id" => $andID
+								),
+								"attribute" => array(
+									"field" => "unsubscribed",
+									"operator" => "eq",
+									"value" => true
+								)
+							)
+						),
+						"or" => array(
+							"0" => array(
+								"segment" => array(
+									"id" => $orID
+								),
+								"attribute" => array(
+									"field" => "unsubscribed",
+									"operator" => "eq",
+									"value" => true
+								)
+							)
+						),
+						"not" => array(
+							"and" => array(
+								"0" => array(
+									"segment" => array(
+										"id" => $notID
+									),
+									"attribute" => array(
+										"field" => "unsubscribed",
+										"operator" => "eq",
+										"value" => true
+									)
+								)
+							),
+							"or" => array(
+								"0" => array(
+									"segment" => array(
+										"id" => $orID2
+									),
+									"attribute" => array(
+										"field" => "unsubscribed",
+										"operator" => "eq",
+										"value" => true
+									)
+								)
+							),
+							"segment" => array(
+								"id" => $andID
+							),
+							"attribute" => array(
+								"field" => "unsubscribed",
+								"operator" => "eq",
+								"value" => true
+							)
+						),
+						"segment" => array(
+							"id" => $andID
+						),
+						"attribute" => array(
+							"field" => "unsubscribed",
+							"operator" => "eq",
+							"value" => true
+						)
+					)
+				)
+			)
+		);				// up to 1000 results per page
 		$request = json_decode($this->cURLPost($url, $header, json_encode($data)));
 		return $request;
 	}
@@ -184,10 +259,12 @@ class Customer extends CustomerIOAppModel
 	 * Return attributes for up to 100 customers by ID. If an ID in the request does not exist, the response omits it.
 	 */
 
-	public function listCustomersAndAttributes($data)
+	public function listCustomersAndAttributes($ids)
 	{
 		$url = $this->config['Config']['US']['BETA_API_URL'] . 'customers/attributes';
 		$header = $this->getHeaderAuthBearerJson();
+		$data = array('ids' => $ids);
+
 		$request = json_decode($this->cURLPost($url, $header, json_encode($data)));
 		return $request;
 	}
