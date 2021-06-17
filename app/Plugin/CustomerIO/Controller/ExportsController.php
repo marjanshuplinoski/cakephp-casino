@@ -67,23 +67,8 @@ class ExportsController extends CustomerIOAppController
 	public function exportCustomerData()
 	{
 		//test data
-		$data = array (
-			'filters' =>
-				array (
-					'and' =>
-						array (
-							0 =>
-								array (
-									'segment' =>
-										array (
-											'id' => '1',
-										),
-								),
-						),
-				),
-		);
-
-		$response = $this->Export->exportCustomerData($data);
+		$segment_id = 1;
+		$response = $this->Export->exportCustomerData($segment_id);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -92,23 +77,9 @@ class ExportsController extends CustomerIOAppController
 	public function exportInfoAboutDeliveries()
 	{
 		//test data
-		$data = array (
-			'filters' =>
-				array (
-					'and' =>
-						array (
-							0 =>
-								array (
-									'segment' =>
-										array (
-											'id' => '1',
-										),
-								),
-						),
-				),
-		);
+		$segment_id = 1;
 
-		$response = $this->Export->exportInfoAboutDeliveries($data);
+		$response = $this->Export->exportInfoAboutDeliveries($segment_id);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;

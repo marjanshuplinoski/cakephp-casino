@@ -54,9 +54,24 @@ class Export extends CustomerIOAppModel {
      * Provide filters and attributes describing the customers you want to export. This endpoint returns export metadata; use the /exports/{export_id}/endpoint to download your export.
      */
 
-    public function exportCustomerData($data) {
+    public function exportCustomerData($segment_id) {
         $url = $this->getBetaAPIURL() . 'exports/customers';
         $header = $this->getHeaderAuthBearerJson();
+		$data = array (
+			'filters' =>
+				array (
+					'and' =>
+						array (
+							0 =>
+								array (
+									'segment' =>
+										array (
+											'id' => $segment_id,
+										),
+								),
+						),
+				),
+		);
         $request = json_decode($this->cURLPost($url, $header, json_encode($data)));
         return $request;
     }
@@ -67,9 +82,24 @@ class Export extends CustomerIOAppModel {
      * This endpoint returns information about an export; use the /exports/{export_id} endpoint to download your export.
      */
 
-    public function exportInfoAboutDeliveries($data) {
+    public function exportInfoAboutDeliveries($segment_id) {
         $url = $this->getBetaAPIURL(). 'exports/deliveries';
         $header = $this->getHeaderAuthBearerJson();
+        $data = array (
+			'filters' =>
+				array (
+					'and' =>
+						array (
+							0 =>
+								array (
+									'segment' =>
+										array (
+											'id' => $segment_id,
+										),
+								),
+						),
+				),
+		);
         $request = json_decode($this->cURLPost($url, $header, $data));
         return $request;
     }
