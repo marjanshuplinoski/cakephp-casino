@@ -39,15 +39,12 @@ class SegmentsController extends CustomerIOAppController
 	{
 		//test data
 		$segment_id = 11;
-		$data = array(
-			'ids' =>
-				array(
-					0 => '995',
-					1 => '993',
-				),
+		$ids = array(
+			0 => '995',
+			1 => '993',
 		);
 
-		$response = $this->Segment->addSegment($segment_id, $data);
+		$response = $this->Segment->addSegment($segment_id, $ids);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -57,15 +54,12 @@ class SegmentsController extends CustomerIOAppController
 	{
 		//test data
 		$segment_id = 11;
-		$data = array(
-			'ids' =>
-				array(
-					0 => '995',
-					1 => '993',
-				),
+		$ids=array(
+			0 => '995',
+			1 => '993',
 		);
 
-		$response = $this->Segment->removeSegment($segment_id, $data);
+		$response = $this->Segment->removeSegment($segment_id, $ids);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -74,15 +68,10 @@ class SegmentsController extends CustomerIOAppController
 	public function createManualSegment()
 	{
 		//test data
-		$data = array(
-			'segment' =>
-				array(
-					'name' => 'Manual Segment 4',
-					'description' => 'My forth manual segment',
-				),
-		);
+		$name ='Manual Segment 4';
+		$description ='My forth manual segment';
 
-		$response = $this->Segment->createManualSegment($data);
+		$response = $this->Segment->createManualSegment($name, $description);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
