@@ -19,12 +19,11 @@ class Activity extends CustomerIOAppModel
 	 * This endpoint returns a list of activities in your workspace.
 	 */
 
-	public function listActivities($start_string, $type, $name, $deleted, $customer_id, $limit)
+	public function listActivities($start, $type, $name, $deleted, $customer_id, $limit)
 	{
-		$url = $this->getBetaAPIURL() . 'activities?start=' . $start_string . '&type=' . $type . '&name=' . $name . '&deleted=' . $deleted . '&customer_id=' . $customer_id . '&limit=' . $limit;
-
+		$url = $this->getBetaAPIURL() . 'activities?start=' . $start . '&type=' . $type . '&name=' . $name . '&deleted=' . $deleted . '&customer_id=' . $customer_id . '&limit=' . $limit;
+		$url = str_replace(" ", "%20", $url);
 		$header = $this->getHeaderAuthBearer();
-
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
 	}

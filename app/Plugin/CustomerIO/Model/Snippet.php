@@ -3,52 +3,61 @@
 App::uses('AppModel', 'Model');
 App::uses('HttpSocket', 'Network/Http');
 
-class Snippet extends CustomerIOAppModel {
+class Snippet extends CustomerIOAppModel
+{
 
-    /**
-     * Model name
-     * @var string
-     */
-    public $name = 'Snippet';
-    public $useTable = false;
+	/**
+	 * Model name
+	 * @var string
+	 */
+	public $name = 'Snippet';
+	public $useTable = false;
 
-    //BETA API START
-    /*
-     * List snippets
-     * Returns a list of snippets in your workspace. Snippets are pieces of reusable content, like a common footer for your emails.
-     */
+	//BETA API START
+	/*
+	 * List snippets
+	 * Returns a list of snippets in your workspace. Snippets are pieces of reusable content, like a common footer for your emails.
+	 */
 
-    public function listSnippets() {
-        $url = $this->getBetaAPIURL() . 'snippets';
-        $header = $this->getHeaderAuthBearer();
-        $request = json_decode($this->cURLGet($url, $header));
-        return $request;
-    }
+	public function listSnippets()
+	{
+		$url = $this->getBetaAPIURL() . 'snippets';
+		$header = $this->getHeaderAuthBearer();
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
 
-    /*
-     * Update snippets
-     * Update the name or value of a snippet.
-     */
+	/*
+	 * Update snippets
+	 * Update the name or value of a snippet.
+	 */
 
-    public function updateSnippets($data) {
-        $url = $this->getBetaAPIURL() . 'snippets';
-        $header = $this->getHeaderAuthBearerJson();
-        $request = json_decode($this->cURLPut($url, $header, json_encode($data)));
-        return $request;
-    }
+	public function updateSnippets($name, $value)
+	{
+		$url = $this->getBetaAPIURL() . 'snippets';
+		$header = $this->getHeaderAuthBearerJson();
+		$data = array(
+			'name' => $name,
+			'value' => $value,
+			'updated_at' => time()
+		);
+		$request = json_decode($this->cURLPut($url, $header, json_encode($data)));
+		return $request;
+	}
 
-    /*
-     * Delete a snippet
-     * Remove a snippet.
-     */
+	/*
+	 * Delete a snippet
+	 * Remove a snippet.
+	 */
 
-    public function deleteSnippet($snippet_name) {
-        $url = $this->getBetaAPIURL() . 'snippets/' . $snippet_name;
-        $url = str_replace(" ","%20",$url);
-        $header = $this->getHeaderAuthBearer();
-        $request = json_decode($this->cURLDelete($url, $header));
-        return $request;
-    }
+	public function deleteSnippet($snippet_name)
+	{
+		$url = $this->getBetaAPIURL() . 'snippets/' . $snippet_name;
+		$url = str_replace(" ", "%20", $url);
+		$header = $this->getHeaderAuthBearer();
+		$request = json_decode($this->cURLDelete($url, $header));
+		return $request;
+	}
 
-    //BETA API END
+	//BETA API END
 }

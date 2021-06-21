@@ -46,9 +46,9 @@ class Campaign extends CustomerIOAppModel
 	 * Stepped series metrics return from oldest to newest (i.e. the 0-index for any result is the oldest step/period).
 	 */
 
-	public function getCampaignMetrics($campaign_id)
+	public function getCampaignMetrics($campaign_id, $period, $steps, $type)
 	{
-		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/metrics';
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/metrics' . '?period=' . $period . '&steps=' . $steps . '&type=' . $type;
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
@@ -60,9 +60,10 @@ class Campaign extends CustomerIOAppModel
 	 * series metrics are ordered oldest to newest (i.e. the 0-index for any result is the oldest step/period).
 	 */
 
-	public function getCampaignLinkMetrics($campaign_id)
+	public function getCampaignLinkMetrics($campaign_id, $period, $steps, $type)
 	{
-		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/metrics/links';
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/metrics/links' . '?period=' . $period . '&steps=' . $steps . '&type=' . $type;
+
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
@@ -86,9 +87,10 @@ class Campaign extends CustomerIOAppModel
 	 * Returns metadata for the messages in a campaign. Provide query parameters to refine the metrics you want to return.
 	 */
 
-	public function getCampaignMessageMetadata($campaign_id)
+	public function getCampaignMessageMetadata($campaign_id, $start, $limit, $type, $metric, $drafts)
 	{
-		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/messages';
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/messages' . '?start=' . $start . '&limit=' . $limit . '&type=' . $type . '&metric=' . $metric . '&drafts=' . $drafts;
+		$url = str_replace(" ", "%20", $url);
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
@@ -138,9 +140,9 @@ class Campaign extends CustomerIOAppModel
 	 * Stepped series metrics return from oldest to newest (i.e. the 0-index for any result is the oldest step/period).
 	 */
 
-	public function getCampaignActionMetrics($campaign_id, $action_id)
+	public function getCampaignActionMetrics($campaign_id, $action_id, $period, $steps, $type)
 	{
-		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/actions/' . $action_id . '/metrics';
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/actions/' . $action_id . '/metrics' . '?period=' . $period . '&steps=' . $steps . '&type=' . $type;
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
@@ -151,9 +153,9 @@ class Campaign extends CustomerIOAppModel
 	 * Returns link click metrics for an individual action. Unless you specify otherwise, the response contains data for the maximum period by days (45 days).
 	 */
 
-	public function getLinkMetricsForAction($campaign_id, $action_id)
+	public function getLinkMetricsForAction($campaign_id, $action_id, $period, $steps, $type)
 	{
-		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/actions/' . $action_id . '/metrics/links';
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/actions/' . $action_id . '/metrics/links' . '?period=' . $period . '&steps=' . $steps . '&type=' . $type;
 		$header = $this->getHeaderAuthBearerJson();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;

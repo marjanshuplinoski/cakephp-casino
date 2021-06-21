@@ -31,7 +31,7 @@ class CampaignsController extends CustomerIOAppController
 		$this->autoRender = false;
 		$this->layout = 'ajax';
 		$this->Auth->allow('listCampaigns', 'getCampaign', 'getCampaignMetrics', 'getCampaignLinkMetrics', 'listCampaignActions',
-			'getCampaignMessageMetadata', 'getCampaignAction', 'updateCampaignAction','getCampaignActionMetrics','getLinkMetricsForAction');
+			'getCampaignMessageMetadata', 'getCampaignAction', 'updateCampaignAction', 'getCampaignActionMetrics', 'getLinkMetricsForAction');
 		parent::beforeFilter();
 	}
 
@@ -60,8 +60,11 @@ class CampaignsController extends CustomerIOAppController
 	{
 		//test data
 		$campaign_id = 1;
+		$period = 'days';			//"hours" "days" "weeks" "months"
+		$steps = 12;				//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$type = 'email';			//"email" "webhook" "twilio" "urban_airship" "slack" "push"
 
-		$response = $this->Campaign->getCampaignMetrics($campaign_id);
+		$response = $this->Campaign->getCampaignMetrics($campaign_id, $period, $steps, $type);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -71,8 +74,11 @@ class CampaignsController extends CustomerIOAppController
 	{
 		//test data
 		$campaign_id = 1;
+		$period = 'days';			//"hours" "days" "weeks" "months"
+		$steps = 12;				//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$type = 'email';			//"email" "webhook" "twilio" "urban_airship" "slack" "push"
 
-		$response = $this->Campaign->getCampaignLinkMetrics($campaign_id);
+		$response = $this->Campaign->getCampaignLinkMetrics($campaign_id, $period, $steps, $type);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -93,8 +99,13 @@ class CampaignsController extends CustomerIOAppController
 	{
 		//test data
 		$campaign_id = 1;
+		$start = '1';
+		$limit = 1;
+		$type = 'email';			//"email" "webhook" "twilio" "urban_airship" "slack" "push"
+		$metric = "created";		//"created" "attempted" "sent" "delivered" "opened" "clicked" "converted" "bounced" "spammed" "unsubscribed" "dropped" "failed" "undeliverable"
+		$drafts = false;
 
-		$response = $this->Campaign->getCampaignMessageMetadata($campaign_id);
+		$response = $this->Campaign->getCampaignMessageMetadata($campaign_id, $start, $limit, $type, $metric, $drafts);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -118,7 +129,7 @@ class CampaignsController extends CustomerIOAppController
 		$campaign_id = 1;
 		$action_id = 3;
 		$body = 'string';
-		$sending_state = 'automatic';
+		$sending_state = 'draft';				//"automatic" "draft" "off"
 		$from_id = NULL;
 		$reply_to_id = NULL;
 		$recipient = 'test@example.com';
@@ -131,7 +142,7 @@ class CampaignsController extends CustomerIOAppController
 				)
 		);
 
-		$response = $this->Campaign->updateCampaignAction($campaign_id, $action_id,  $body, $sending_state, $from_id, $reply_to_id, $recipient, $subject, $headers);
+		$response = $this->Campaign->updateCampaignAction($campaign_id, $action_id, $body, $sending_state, $from_id, $reply_to_id, $recipient, $subject, $headers);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -142,8 +153,11 @@ class CampaignsController extends CustomerIOAppController
 		//test data
 		$campaign_id = 1;
 		$action_id = 3;
+		$period = 'days';				//"hours" "days" "weeks" "months"
+		$steps = 12;					//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$type = 'email';				//"email" "webhook" "twilio" "urban_airship" "slack" "push"
 
-		$response = $this->Campaign->getCampaignActionMetrics($campaign_id, $action_id);
+		$response = $this->Campaign->getCampaignActionMetrics($campaign_id, $action_id, $period, $steps, $type);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -154,8 +168,11 @@ class CampaignsController extends CustomerIOAppController
 		//test data
 		$campaign_id = 1;
 		$action_id = 3;
+		$period = 'days';						//"hours" "days" "weeks" "months"
+		$steps = 12;							//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$type = 'email';						//"email" "webhook" "twilio" "urban_airship" "slack" "push"
 
-		$response = $this->Campaign->getLinkMetricsForAction($campaign_id, $action_id);
+		$response = $this->Campaign->getLinkMetricsForAction($campaign_id, $action_id, $period, $steps, $type);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;

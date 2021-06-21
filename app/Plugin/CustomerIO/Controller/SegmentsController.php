@@ -41,8 +41,8 @@ class SegmentsController extends CustomerIOAppController
 		$segment_id = 11;
 		$ids = array(
 			0 => '995',
-			1 => '993',
-		);
+			1 => '993'
+		);                                        // up to 1000 records
 
 		$response = $this->Segment->addSegment($segment_id, $ids);
 		$response = json_decode(json_encode($response), true);
@@ -54,10 +54,10 @@ class SegmentsController extends CustomerIOAppController
 	{
 		//test data
 		$segment_id = 11;
-		$ids=array(
+		$ids = array(
 			0 => '995',
-			1 => '993',
-		);
+			1 => '993'
+		);                                        // up to 1000 records
 
 		$response = $this->Segment->removeSegment($segment_id, $ids);
 		$response = json_decode(json_encode($response), true);
@@ -68,8 +68,8 @@ class SegmentsController extends CustomerIOAppController
 	public function createManualSegment()
 	{
 		//test data
-		$name ='Manual Segment 4';
-		$description ='My forth manual segment';
+		$name = 'Manual Segment 5';
+		$description = 'My 5 manual segment';
 
 		$response = $this->Segment->createManualSegment($name, $description);
 		$response = json_decode(json_encode($response), true);
@@ -90,7 +90,7 @@ class SegmentsController extends CustomerIOAppController
 	public function getSegment()
 	{
 		//test data
-		$segment_id = 14;
+		$segment_id = 16;
 
 		$response = $this->Segment->getSegment($segment_id);
 		$response = json_decode(json_encode($response), true);
@@ -102,7 +102,7 @@ class SegmentsController extends CustomerIOAppController
 	public function deleteSegment()
 	{
 		//test data
-		$segment_id = 14;
+		$segment_id = 13;
 
 		$response = $this->Segment->deleteSegment($segment_id);
 		$response = json_decode(json_encode($response), true);
@@ -137,9 +137,11 @@ class SegmentsController extends CustomerIOAppController
 	public function listCustomersInSegment()
 	{
 		//test data
-		$segment_id = 11;
+		$segment_id = 10;
+		$start = 'something';
+		$limit = 1;
 
-		$response = $this->Segment->listCustomersInSegment($segment_id);
+		$response = $this->Segment->listCustomersInSegment($segment_id, $start, $limit);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;

@@ -60,8 +60,12 @@ class NewslettersController extends CustomerIOAppController
 	{
 		//test data
 		$newsletter_id = 3;
+		$period = 'days';						//"hours" "days" "weeks" "months"
+		$steps = 12;							//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$type = 'email';						//"email" "webhook" "twilio" "urban_airship" "slack" "push"
 
-		$response = $this->Newsletter->getNewsletterMetrics($newsletter_id);
+
+		$response = $this->Newsletter->getNewsletterMetrics($newsletter_id, $period, $steps, $type);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -71,8 +75,11 @@ class NewslettersController extends CustomerIOAppController
 	{
 		//test data
 		$newsletter_id = 3;
+		$period = 'days';						//"hours" "days" "weeks" "months"
+		$steps = 12;							//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$unique = false;
 
-		$response = $this->Newsletter->getNewsletterLinkMetrics($newsletter_id);
+		$response = $this->Newsletter->getNewsletterLinkMetrics($newsletter_id, $period, $steps, $unique);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -93,8 +100,11 @@ class NewslettersController extends CustomerIOAppController
 	{
 		//test data
 		$newsletter_id = 3;
+		$start = '1';
+		$limit = 1;
+		$metric = "created";					//"created" "attempted" "sent" "delivered" "opened" "clicked" "converted" "bounced" "spammed" "unsubscribed" "dropped" "failed" "undeliverable"
 
-		$response = $this->Newsletter->getNewsletterMessageMetadata($newsletter_id);
+		$response = $this->Newsletter->getNewsletterMessageMetadata($newsletter_id, $start, $limit, $metric);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -121,7 +131,7 @@ class NewslettersController extends CustomerIOAppController
 		$from_id = NULL;
 		$reply_to_id = NULL;
 		$recipient = 'example@mail.com';
-		$subject = 'Did you get that thing I sent you?!!!???????';
+		$subject = 'Did you get that thing I sent 2 you?!!!???????';
 		$headers = array(
 			0 =>
 				array(
@@ -141,8 +151,11 @@ class NewslettersController extends CustomerIOAppController
 		//test data
 		$newsletter_id = 3;
 		$contents_id = 22;
+		$period = 'days';					//hours" "days" "weeks" "months"
+		$steps = 12;						//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$type = 'email';					//"email" "webhook" "twilio" "urban_airship" "slack" "push"
 
-		$response = $this->Newsletter->getMetricsForVariant($newsletter_id, $contents_id);
+		$response = $this->Newsletter->getMetricsForVariant($newsletter_id, $contents_id, $period, $steps, $type);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -153,8 +166,11 @@ class NewslettersController extends CustomerIOAppController
 		//test data
 		$newsletter_id = 3;
 		$contents_id = 22;
+		$period = 'days';					//hours" "days" "weeks" "months"
+		$steps = 12;						//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$type = 'email';					//"email" "webhook" "twilio" "urban_airship" "slack" "push"
 
-		$response = $this->Newsletter->getNewsletterVariantLinkMetrics($newsletter_id, $contents_id);
+		$response = $this->Newsletter->getNewsletterVariantLinkMetrics($newsletter_id, $contents_id, $period, $steps, $type);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;

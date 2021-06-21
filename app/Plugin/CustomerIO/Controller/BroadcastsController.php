@@ -40,7 +40,7 @@ class BroadcastsController extends CustomerIOAppController
 	{
 		//test data
 		$broadcast_id = 7;
-		$segmentID = 3;
+		$segmentID = 4;
 		$orField = "interest";
 		$orField2 = "roadrunners";
 		$orValue = "state";
@@ -49,8 +49,11 @@ class BroadcastsController extends CustomerIOAppController
 		$orNotValue = "roadrunners";
 		$dataHeadline = "Roadrunner spotted in Albuquerque!!!!";
 		$dataText = "We received reports of a roadrunner in your immediate area! Head to your dashboard to view more information";
+		$email_add_duplicates = false;
+		$email_ignore_missing = false;
+		$id_ignore_missing = false;
 
-		$response = $this->Broadcast->triggerBroadcast($broadcast_id, $segmentID, $orField, $orField2, $orValue, $orValue2, $orNotField, $orNotValue, $dataHeadline, $dataText);
+		$response = $this->Broadcast->triggerBroadcast($broadcast_id, $segmentID, $orField, $orField2, $orValue, $orValue2, $orNotField, $orNotValue, $dataHeadline, $dataText, $email_add_duplicates, $email_ignore_missing, $id_ignore_missing);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -60,7 +63,8 @@ class BroadcastsController extends CustomerIOAppController
 	{
 		//test data
 		$broadcast_id = 7;
-		$trigger_id = 2;
+		$trigger_id = 4;
+
 		$response = $this->Broadcast->getStatusBroadcast($broadcast_id, $trigger_id);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
@@ -72,7 +76,10 @@ class BroadcastsController extends CustomerIOAppController
 		//test data
 		$broadcast_id = 7;
 		$trigger_id = 2;
-		$response = $this->Broadcast->listErrorsFromBroadcast($broadcast_id, $trigger_id);
+		$start = "1";
+		$limit = 1;
+
+		$response = $this->Broadcast->listErrorsFromBroadcast($broadcast_id, $trigger_id, $start, $limit);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -91,6 +98,7 @@ class BroadcastsController extends CustomerIOAppController
 	{
 		//test data
 		$broadcast_id = 7;
+
 		$response = $this->Broadcast->getBroadcast($broadcast_id);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
@@ -101,7 +109,11 @@ class BroadcastsController extends CustomerIOAppController
 	{
 		//test data
 		$broadcast_id = 7;
-		$response = $this->Broadcast->getMetricsForBroadcast($broadcast_id);
+		$period = "days";				//"hours" "days" "weeks" "months"
+		$steps = 12;					//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$type = 'email';				//"email" "webhook" "twilio" "urban_airship" "slack" "push"
+
+		$response = $this->Broadcast->getMetricsForBroadcast($broadcast_id, $period, $steps, $type);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -111,7 +123,11 @@ class BroadcastsController extends CustomerIOAppController
 	{
 		//test data
 		$broadcast_id = 7;
-		$response = $this->Broadcast->getBroadcastLinkMetrics($broadcast_id);
+		$period = "days";				//"hours" "days" "weeks" "months"
+		$steps = 12;					//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$unique = false;
+
+		$response = $this->Broadcast->getBroadcastLinkMetrics($broadcast_id, $period, $steps, $unique);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -121,6 +137,7 @@ class BroadcastsController extends CustomerIOAppController
 	{
 		//test data
 		$broadcast_id = 7;
+
 		$response = $this->Broadcast->listBroadcastActions($broadcast_id);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
@@ -131,7 +148,13 @@ class BroadcastsController extends CustomerIOAppController
 	{
 		//test data
 		$broadcast_id = 7;
-		$response = $this->Broadcast->getMessageMetadataForBroadcast($broadcast_id);
+		$start = "";
+		$limit = 1;
+		$metric = 'created';				//"created" "attempted" "sent" "delivered" "opened" "clicked" "converted" "bounced" "spammed" "unsubscribed" "dropped" "failed" "undeliverable"
+		$state = 'failed';					//"failed" "sent" "drafted" "attempted"
+		$type = 'email';					//"email" "webhook" "twilio" "urban_airship" "slack" "push"
+
+		$response = $this->Broadcast->getMessageMetadataForBroadcast($broadcast_id, $start, $limit, $metric, $state, $type);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -142,6 +165,7 @@ class BroadcastsController extends CustomerIOAppController
 		//test data
 		$broadcast_id = 7;
 		$action_id = 41;
+
 		$response = $this->Broadcast->getBroadcastAction($broadcast_id, $action_id);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
@@ -154,7 +178,7 @@ class BroadcastsController extends CustomerIOAppController
 		$broadcast_id = 7;
 		$action_id = 41;
 		$body = 'string';
-		$sending_state = 'automatic';
+		$sending_state = 'automatic';					//"automatic" "draft" "off"
 		$from_id = NULL;
 		$reply_to_id = NULL;
 		$recipient = 'test@example.com';
@@ -178,8 +202,12 @@ class BroadcastsController extends CustomerIOAppController
 		//test data
 		$broadcast_id = 7;
 		$action_id = 41;
+		$period = "days";				//"hours" "days" "weeks" "months"
+		$steps = 12;					//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$type = 'email';				//"email" "webhook" "twilio" "urban_airship" "slack" "push"
 
-		$response = $this->Broadcast->getBroadcastActionMetrics($broadcast_id, $action_id);
+
+		$response = $this->Broadcast->getBroadcastActionMetrics($broadcast_id, $action_id, $period, $steps, $type);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -190,8 +218,12 @@ class BroadcastsController extends CustomerIOAppController
 		//test data
 		$broadcast_id = 7;
 		$action_id = 41;
+		$period = "days";				//"hours" "days" "weeks" "months"
+		$steps = 12;					//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$type = 'email';				//"email" "webhook" "twilio" "urban_airship" "slack" "push"
 
-		$response = $this->Broadcast->getBroadcastActionLinkMetrics($broadcast_id, $action_id);
+
+		$response = $this->Broadcast->getBroadcastActionLinkMetrics($broadcast_id, $action_id, $period, $steps, $type);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;

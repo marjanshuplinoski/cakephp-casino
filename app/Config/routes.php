@@ -46,6 +46,8 @@
 	Router::connect('/CustomerIO/Customers/listCustomersAndAttributes', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Customers', 'action' => 'listCustomersAndAttributes'));
 	Router::connect('/CustomerIO/Customers/lookupMessagesSentToCustomer', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Customers', 'action' => 'lookupMessagesSentToCustomer'));
 	Router::connect('/CustomerIO/Customers/lookupCustomerSegments', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Customers', 'action' => 'lookupCustomerSegments'));
+	Router::connect('/CustomerIO/Customers/lookupMessagesSentToCustomer', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Customers', 'action' => 'lookupMessagesSentToCustomer'));
+	Router::connect('/CustomerIO/Customers/lookupCustomerActivities', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Customers', 'action' => 'lookupCustomerActivities'));
 	//
 	//Activities
 	Router::connect('/CustomerIO/Activities/listActivities', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Activities', 'action' => 'listActivities'));
@@ -98,6 +100,11 @@
 	Router::connect('/CustomerIO/Messages/listMessages', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'listMessages'));
 	Router::connect('/CustomerIO/Messages/getMessage', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'getMessage'));
 	Router::connect('/CustomerIO/Messages/getArchivedMessage', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'getArchivedMessage'));
+	Router::connect('/CustomerIO/Messages/listTransactionalMessages', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'listTransactionalMessages'));
+	Router::connect('/CustomerIO/Messages/getTransactionalMessage', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'getTransactionalMessage'));
+	Router::connect('/CustomerIO/Messages/getTransactionalMessageMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'getTransactionalMessageMetrics'));
+	Router::connect('/CustomerIO/Messages/getTransactionalMessageLinkMetrics', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'getTransactionalMessageLinkMetrics'));
+	Router::connect('/CustomerIO/Messages/getTransactionalMessageDeliveries', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Messages','action'=>'getTransactionalMessageDeliveries'));
 	//Newsletters
 	Router::connect('/CustomerIO/Newsletters/listNewsletters', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'listNewsletters'));
 	Router::connect('/CustomerIO/Newsletters/getNewsletter', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Newsletters','action'=>'getNewsletter'));

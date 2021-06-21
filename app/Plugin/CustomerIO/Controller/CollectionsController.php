@@ -37,7 +37,7 @@ class CollectionsController extends CustomerIOAppController
 	public function createCollection()
 	{
 		//test data
-		$name = 'testCollection';
+		$name = 'testCollection22';
 		$dataCollection = array(
 			0 =>
 				array(
@@ -65,7 +65,8 @@ class CollectionsController extends CustomerIOAppController
 	public function lookupCollection()
 	{
 		//test data
-		$collection_id = 3;
+		$collection_id = 9;
+
 		$response = $this->Collection->lookupCollection($collection_id);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
@@ -75,7 +76,8 @@ class CollectionsController extends CustomerIOAppController
 	public function deleteCollection()
 	{
 		//test data
-		$collection_id = 6;
+		$collection_id = 9;
+
 		$response = $this->Collection->deleteCollection($collection_id);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
@@ -85,7 +87,7 @@ class CollectionsController extends CustomerIOAppController
 	public function updateCollection()
 	{
 		//test data
-		$collection_id = 9;
+		$collection_id = 10;
 		$name = 'TestName';
 		$dataCollection = array(
 							0 =>
@@ -103,7 +105,7 @@ class CollectionsController extends CustomerIOAppController
 	public function lookupCollectionContents()
 	{
 		//test data
-		$collection_id = 9;
+		$collection_id = 10;
 
 		$response = $this->Collection->lookupCollectionContents($collection_id);
 		$response = json_decode(json_encode($response), true);
@@ -114,7 +116,7 @@ class CollectionsController extends CustomerIOAppController
 	public function updateContentsOfCollection()
 	{
 		//test data
-		$collection_id = 9;
+		$collection_id = 10;
 		$eventName = "SuperEvent";
 
 		$response = $this->Collection->updateContentsOfCollection($collection_id, $eventName);

@@ -46,9 +46,9 @@ class Newsletter extends CustomerIOAppModel
 	 * Stepped series metrics return from oldest to newest (i.e. the 0-index for any result is the oldest step/period).
 	 */
 
-	public function getNewsletterMetrics($newsletter_id)
+	public function getNewsletterMetrics($newsletter_id, $period, $steps, $type)
 	{
-		$url = $this->getBetaAPIURL() . 'newsletters/' . $newsletter_id . '/metrics';
+		$url = $this->getBetaAPIURL() . 'newsletters/' . $newsletter_id . '/metrics' . '?period=' . $period . '&steps=' . $steps . '&type=' . $type;
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
@@ -60,9 +60,9 @@ class Newsletter extends CustomerIOAppModel
 	 *  (i.e. the 0-index for any result is the oldest step/period).
 	 */
 
-	public function getNewsletterLinkMetrics($newsletter_id)
+	public function getNewsletterLinkMetrics($newsletter_id, $period, $steps, $unique)
 	{
-		$url = $this->getBetaAPIURL() . 'newsletters/' . $newsletter_id . '/metrics/links';
+		$url = $this->getBetaAPIURL() . 'newsletters/' . $newsletter_id . '/metrics/links' . '?period=' . $period . '&steps=' . $steps . '&unique=' . $unique;
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
@@ -86,9 +86,10 @@ class Newsletter extends CustomerIOAppModel
 	 * Returns metadata for the message(s) sent by newsletter. Provide query parameters to refine the metrics you want to return.
 	 */
 
-	public function getNewsletterMessageMetadata($newsletter_id)
+	public function getNewsletterMessageMetadata($newsletter_id, $start, $limit, $metric)
 	{
-		$url = $this->getBetaAPIURL() . 'newsletters/' . $newsletter_id . '/messages';
+		$url = $this->getBetaAPIURL() . 'newsletters/' . $newsletter_id . '/messages' . '?start=' . $start . '&limit=' . $limit . '&metric=' . $metric;
+		$url = str_replace(" ", "%20", $url);
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
@@ -133,9 +134,9 @@ class Newsletter extends CustomerIOAppModel
 	 * Stepped series metrics are arranged from oldest to newest (i.e. the 0-index for any result is the oldest period/step).
 	 */
 
-	public function getMetricsForVariant($newsletter_id, $contents_id)
+	public function getMetricsForVariant($newsletter_id, $contents_id, $period, $steps, $type)
 	{
-		$url = $this->getBetaAPIURL() . 'newsletters/' . $newsletter_id . '/contents/' . $contents_id . '/metrics';
+		$url = $this->getBetaAPIURL() . 'newsletters/' . $newsletter_id . '/contents/' . $contents_id . '/metrics' . '?period=' . $period . '&steps=' . $steps . '&type=' . $type;
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
@@ -146,9 +147,9 @@ class Newsletter extends CustomerIOAppModel
 	 * Returns link click metrics for an individual newsletter variant. Unless you specify otherwise, the response contains data for the maximum period by days (45 days).
 	 */
 
-	public function getNewsletterVariantLinkMetrics($newsletter_id, $contents_id)
+	public function getNewsletterVariantLinkMetrics($newsletter_id, $contents_id, $period, $steps, $type)
 	{
-		$url = $this->getBetaAPIURL() . 'newsletters/' . $newsletter_id . '/contents/' . $contents_id . '/metrics/links';
+		$url = $this->getBetaAPIURL() . 'newsletters/' . $newsletter_id . '/contents/' . $contents_id . '/metrics/links' . '?period=' . $period . '&steps=' . $steps . '&type=' . $type;
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;

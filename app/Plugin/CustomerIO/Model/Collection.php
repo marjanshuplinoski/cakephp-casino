@@ -20,7 +20,7 @@ class Collection extends CustomerIOAppModel
 	 * Create a new collection and provide the data that you'll access from the collection or the url that you'll download the data from.
 	 */
 
-	public function createCollection($data, $name, $dataCollection)
+	public function createCollection($name, $dataCollection)
 	{
 		$url = $this->getBetaAPIURL() . 'collections';
 		$header = $this->getHeaderAuthBearerJson();

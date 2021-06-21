@@ -30,15 +30,18 @@ class SenderIdentitiesController extends CustomerIOAppController
 	{
 		$this->autoRender = false;
 		$this->layout = 'ajax';
-		$this->Auth->allow('listSenderIdentities','getSender','getSenderUsageData');
+		$this->Auth->allow('listSenderIdentities', 'getSender', 'getSenderUsageData');
 		parent::beforeFilter();
 	}
 
 	public function listSenderIdentities()
 	{
 		//test data
+		$start = 'start';
+		$limit = 1;
+		$sort = 'asc';				//"asc" "desc"
 
-		$response = $this->SenderIdentity->listSenderIdentities();
+		$response = $this->SenderIdentity->listSenderIdentities($start, $limit, $sort);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -53,6 +56,7 @@ class SenderIdentitiesController extends CustomerIOAppController
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
 	}
+
 	public function getSenderUsageData()
 	{
 		//test data

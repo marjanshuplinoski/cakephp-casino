@@ -55,7 +55,7 @@ class Segment extends CustomerIOAppModel
 	 * Create a manual segment with a name and a description. This request creates an empty segment.
 	 */
 
-	public function createManualSegment($name,$description)
+	public function createManualSegment($name, $description)
 	{
 		$url = $this->getBetaAPIURL() . 'segments';
 		$header = $this->getHeaderAuthBearer();
@@ -140,9 +140,10 @@ class Segment extends CustomerIOAppModel
 	 * Returns the IDs of customers in a segment.
 	 */
 
-	public function listCustomersInSegment($segment_id)
+	public function listCustomersInSegment($segment_id, $start, $limit)
 	{
-		$url = $this->getBetaAPIURL() . 'segments/' . $segment_id . '/membership';
+		$url = $this->getBetaAPIURL() . 'segments/' . $segment_id . '/membership' . '?start='  . '&limit=' . $limit;
+		$url = str_replace(" ", "%20", $url);
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;

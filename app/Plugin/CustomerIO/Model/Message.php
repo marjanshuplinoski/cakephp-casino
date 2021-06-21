@@ -20,16 +20,23 @@ class Message extends CustomerIOAppModel
 	 * Send a transactional email. You can send a with a template using a transactional_message_id or send your own body, subject, and from values at send time.
 	 */
 
-	public function sendTransactionalEmail($transactional_msg_id, $to, $identifier, $message_data, $bcc, $disable_message_retention, $send_to_unsubscribed, $tracked, $queue_draft, $disable_css_preprocessing)
+	public function sendTransactionalEmail($transactional_msg_id, $to, $from, $subject, $identifier, $message_data, $bcc, $reply_to, $preheader, $plaintext_body, $attachments, $headers, $disable_message_retention, $send_to_unsubscribed, $tracked, $queue_draft, $disable_css_preprocessing)
 	{
 		$url = $this->getAPPAPIURL() . 'send/email';
 		$header = $this->getHeaderAuthBearerJson();
 		$data = array(
 			'transactional_message_id' => $transactional_msg_id,
 			'to' => $to,
+			'from' => $from,
+			'subject' => $subject,
 			'identifiers' => $identifier,
 			'message_data' => $message_data,
 			'bcc' => $bcc,
+			'reply_to' => $reply_to,
+			'preheader' => $preheader,
+			'plaintext_body' => $plaintext_body,
+			'attachments' => $attachments,
+			'headers' => $headers,
 			'disable_message_retention' => $disable_message_retention,
 			'send_to_unsubscribed' => $send_to_unsubscribed,
 			'tracked' => $tracked,
@@ -48,9 +55,10 @@ class Message extends CustomerIOAppModel
 	 * The request body contains filters determining the deliveries you want to return information about.
 	 */
 
-	public function listMessages()
+	public function listMessages($start, $limit, $type, $metric, $drafts, $campaign_id, $newsletter_id, $action_id)
 	{
-		$url = $this->getBetaAPIURL() . 'messages';
+		$url = $this->getBetaAPIURL() . 'messages' . '?start=' . $start . '&limit=' . $limit . '&type=' . $type . '&metric=' . $metric . '&drafts=' . $drafts . '&campaign_id' . $campaign_id . '&newsletter_id' . $newsletter_id . '&action_id=' . $action_id;
+		$url = str_replace(" ", "%20", $url);
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
@@ -78,6 +86,77 @@ class Message extends CustomerIOAppModel
 	public function getArchivedMessage($message_id)
 	{
 		$url = $this->getBetaAPIURL() . 'messages/' . $message_id . '/archived_message';
+		$header = $this->getHeaderAuthBearer();
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
+
+	// Transactional Messages
+	/*
+	 * List transactional messages
+	 * Returns a list of your transactional messages—the transactional IDs that you use to trigger an individual
+	 * transactional delivery. This endpoint does not return information about deliveries (instances of a message
+	 * sent to a person) themselves.
+	 */
+
+	public function listTransactionalMessages()
+	{
+		$url = $this->getBetaAPIURL() . 'transactional';
+		$header = $this->getHeaderAuthBearer();
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
+
+	/*
+	 * Get a transactional message
+	 * Returns information about an individual transactional message.
+	 */
+
+	public function getTransactionalMessage($message_id, $period, $steps)
+	{
+		$url = $this->getBetaAPIURL() . 'transactional/' . $message_id . '?period=' . $period . '&steps=' . $steps;
+		$header = $this->getHeaderAuthBearer();
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
+
+	/*
+	 * Get a transactional message metrics
+	 * Returns a list of metrics for a transactional message both in total and in steps (days, weeks, etc).
+	 * Stepped series metrics return from oldest to newest (i.e. the 0-index for any result is the oldest step/period).
+	 */
+
+	public function getTransactionalMessageMetrics($message_id, $period, $steps)
+	{
+		$url = $this->getBetaAPIURL() . 'transactional/' . $message_id . '/metrics' . '?period=' . $period . '&steps=' . $steps;
+		$header = $this->getHeaderAuthBearer();
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
+
+	/*
+	 * Get transactional message link metrics
+	 * Returns metrics for clicked links from a transactional message, both in total and in series periods (days,
+	 * weeks, etc). series metrics are ordered oldest to newest (i.e. the 0-index for any result is the oldest
+	 * step/period).
+	 */
+
+
+	public function getTransactionalMessageLinkMetrics($message_id, $period, $steps, $unique)
+	{
+		$url = $this->getBetaAPIURL() . 'transactional/' . $message_id . '/metrics/links' . '?period=' . $period . '&steps=' . $steps . '&unique=' . $unique;
+		$header = $this->getHeaderAuthBearer();
+		$request = json_decode($this->cURLGet($url, $header));
+		return $request;
+	}
+
+	/*
+	 *
+	 */
+	public function getTransactionalMessageDeliveries($message_id, $start, $limit, $metric, $state)
+	{
+		$url = $this->getBetaAPIURL() . 'transactional/' . $message_id . '/messages' . '?start=' . $start . '&limit=' . $limit . '&metric=' . $metric . '&state=' . $state;
+		$url = str_replace(" ", "%20", $url);
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;

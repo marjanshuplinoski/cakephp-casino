@@ -38,14 +38,14 @@ class ActivitiesController extends CustomerIOAppController
 	{
 		//test data
 
-		$start_string='device';
-		$type =''; // "page" "event" "attribute_change" "failed_attribute_change" "stripe_event" "drafted_email" "failed_email" "dropped_email" "sent_email" "spammed_email" "bounced_email" "delivered_email" "triggered_email" "opened_email" "clicked_email" "converted_email" "unsubscribed_email" "attempted_email" "undeliverable_email" "device_change" "attempted_action" "drafted_action" "sent_action" "delivered_action" "bounced_action" "failed_action" "converted_action" "undeliverable_action" "opened_action" "secondary:dropped_email" "secondary:spammed_email" "secondary:bounced_email" "secondary:delivered_email" "secondary:opened_email" "secondary:clicked_email" "secondary:failed_email"
+		$start = 'device';
+		$type = ''; // "page" "event" "attribute_change" "failed_attribute_change" "stripe_event" "drafted_email" "failed_email" "dropped_email" "sent_email" "spammed_email" "bounced_email" "delivered_email" "triggered_email" "opened_email" "clicked_email" "converted_email" "unsubscribed_email" "attempted_email" "undeliverable_email" "device_change" "attempted_action" "drafted_action" "sent_action" "delivered_action" "bounced_action" "failed_action" "converted_action" "undeliverable_action" "opened_action" "secondary:dropped_email" "secondary:spammed_email" "secondary:bounced_email" "secondary:delivered_email" "secondary:opened_email" "secondary:clicked_email" "secondary:failed_email"
 		$name = '';  // name of event or attribute
-		$deleted=0;
-		$customer_id='888';
-		$limit='1';
+		$deleted = 0;
+		$customer_id = '888';
+		$limit = '1';
 
-		$response = $this->Activity->listActivities($start_string, $type, $name, $deleted, $customer_id, $limit);
+		$response = $this->Activity->listActivities($start, $type, $name, $deleted, $customer_id, $limit);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;

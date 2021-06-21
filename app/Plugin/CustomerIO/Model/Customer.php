@@ -236,7 +236,7 @@ class Customer extends CustomerIOAppModel
 					)
 				)
 			)
-		);				// up to 1000 results per page
+		);                // up to 1000 results per page
 		$request = json_decode($this->cURLPost($url, $header, json_encode($data)));
 		return $request;
 	}
@@ -246,9 +246,10 @@ class Customer extends CustomerIOAppModel
 	 * Return a list of attributes for a customer profile. You can use attributes to fashion segments or as liquid merge fields in your messages.
 	 */
 
-	public function lookupCustomerAttributes($customer_id)
+	public function lookupCustomerAttributes($customer_id, $start, $limit)
 	{
-		$url = $this->config['Config']['US']['BETA_API_URL'] . 'customers/' . $customer_id . '/attributes';
+		$url = $this->config['Config']['US']['BETA_API_URL'] . 'customers/' . $customer_id . '/attributes' . '?start=' . $start . '&limit=' . $limit;
+		$url = str_replace(" ", "%20", $url);
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
@@ -287,9 +288,9 @@ class Customer extends CustomerIOAppModel
 	 * Return metadata for the messages sent to a customer profile.
 	 */
 
-	public function lookupMessagesSentToCustomer($customer_id)
+	public function lookupMessagesSentToCustomer($customer_id, $start, $limit)
 	{
-		$url = $this->config['Config']['US']['BETA_API_URL'] . 'customers/' . $customer_id . '/messages';
+		$url = $this->config['Config']['US']['BETA_API_URL'] . 'customers/' . $customer_id . '/messages' . '?start=' . $start . '&limit=' . $limit;
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
@@ -300,9 +301,10 @@ class Customer extends CustomerIOAppModel
 	 * Return a list of activities performed by, or for, a customer. Activities are things like attribute changes and message sends.
 	 */
 
-	public function lookupCustomerActivities($customer_id)
+	public function lookupCustomerActivities($customer_id, $start, $limit, $type, $name)
 	{
-		$url = $this->getBetaAPIURL() . 'customers/' . $customer_id . '/activities';
+		$url = $this->getBetaAPIURL() . 'customers/' . $customer_id . '/activities' . '?start=' . $start . '&limit=' . $limit . '&type=' . $type . '&name=' . $name;
+		$url = str_replace(" ", "%20", $url);
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;

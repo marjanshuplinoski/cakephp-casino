@@ -82,23 +82,16 @@ class Export extends CustomerIOAppModel {
      * This endpoint returns information about an export; use the /exports/{export_id} endpoint to download your export.
      */
 
-    public function exportInfoAboutDeliveries($segment_id) {
+    public function exportInfoAboutDeliveries($newsletter_id,$attributes,$metric,$drafts) {
         $url = $this->getBetaAPIURL(). 'exports/deliveries';
         $header = $this->getHeaderAuthBearerJson();
-        $data = array (
-			'filters' =>
-				array (
-					'and' =>
-						array (
-							0 =>
-								array (
-									'segment' =>
-										array (
-											'id' => $segment_id,
-										),
-								),
-						),
-				),
+        $data = array(
+			"newsletter_id" => $newsletter_id,
+			"start" => time(),
+			"end" => time(),
+			"attributes" => $attributes,
+			"metric" => $metric,
+			"drafts" => $drafts
 		);
         $request = json_decode($this->cURLPost($url, $header, $data));
         return $request;
