@@ -138,7 +138,7 @@ class SegmentsController extends CustomerIOAppController
 	{
 		//test data
 		$segment_id = 10;
-		$start = 'something';
+		$start = '';
 		$limit = 1;
 
 		$response = $this->Segment->listCustomersInSegment($segment_id, $start, $limit);

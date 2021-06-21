@@ -37,7 +37,7 @@ class MessagesController extends CustomerIOAppController
 
 	public function sendTransactionalEmail()
 	{
-		//test data
+		//test data "with template"
 		$transactional_msg_id = 2;
 		$to = 'player3@example.com';
 		$identifier = array(
@@ -54,15 +54,46 @@ class MessagesController extends CustomerIOAppController
 		$reply_to = "other@admin.com";
 		$preheader = 'Some preheader';
 		$plaintext_body = 'some plaintext body';
-		$attachments = array('1');
-		$headers = array('1');
+		$attachments = array('1');										//Request entity must be JSON encoded and not exceed 2548 KB
+		$headers = array('1');											//Request entity must be JSON encoded and not exceed 2548 KB
 		$disable_message_retention = false;
 		$send_to_unsubscribed = true;
 		$tracked = true;
 		$queue_draft = false;
 		$disable_css_preprocessing = true;
 
-		$response = $this->Message->sendTransactionalEmail($transactional_msg_id, $to, $from, $subject, $identifier, $message_data, $bcc, $reply_to, $preheader, $plaintext_body, $attachments, $headers, $disable_message_retention, $send_to_unsubscribed, $tracked, $queue_draft, $disable_css_preprocessing);
+		$response = $this->Message->sendTransactionalEmailWithTemplate($transactional_msg_id, $to, $identifier, $body, $subject, $from, $message_data, $bcc, $reply_to, $preheader,
+			$plaintext_body, $attachments, $headers, $disable_message_retention, $send_to_unsubscribed, $tracked, $queue_draft, $disable_css_preprocessing);
+		//end test data "with template"
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//		test data "without template"
+//		$body = 'Some body';
+//		$subject = 'Some subject';
+//		$from = 'admin@admin.com';
+//		$to = 'player3@example.com';
+//		$identifier = array(
+//			'id' => 12345,
+//		);
+//		$message_data = array(
+//			'password_reset_token' => 'abcde-12345-fghij-d888',
+//			'account_id' => '123dj',
+//		);
+//		$bcc = 'bcc@example.com';
+//		$reply_to = "other@admin.com";
+//		$preheader = 'Some preheader';
+//		$plaintext_body = 'some plaintext body';
+//		$attachments = array('1');										//Request entity must be JSON encoded and not exceed 2548 KB
+//		$headers = array('1');											//Request entity must be JSON encoded and not exceed 2548 KB
+//		$disable_message_retention = false;
+//		$send_to_unsubscribed = true;
+//		$tracked = true;
+//		$queue_draft = false;
+//		$disable_css_preprocessing = true;
+//
+//		$response = $this->Message->sendTransactionalEmailWithoutTemplate($body, $subject,$from, $to, $identifier, $message_data, $bcc, $reply_to, $preheader, $plaintext_body, $attachments, $headers, $disable_message_retention, $send_to_unsubscribed, $tracked, $queue_draft, $disable_css_preprocessing);
+		//end test data "without template"
+
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -71,10 +102,10 @@ class MessagesController extends CustomerIOAppController
 	public function listMessages()
 	{
 		//test data
-		$start = 'next';
+		$start = '';
 		$limit = 1;
-		$type = 'email';					//"email" "webhook" "twilio" "urban_airship" "slack" "push"
-		$metric = 'created';				//"created" "attempted" "sent" "delivered" "opened" "clicked" "converted" "bounced" "spammed" "unsubscribed" "dropped" "failed" "undeliverable"
+		$type = 'email';                    //"email" "webhook" "twilio" "urban_airship" "slack" "push"
+		$metric = 'created';                //"created" "attempted" "sent" "delivered" "opened" "clicked" "converted" "bounced" "spammed" "unsubscribed" "dropped" "failed" "undeliverable"
 		$drafts = false;
 		$campaign_id = 1;
 		$newsletter_id = 1;
@@ -122,8 +153,8 @@ class MessagesController extends CustomerIOAppController
 	{
 		//test data
 		$message_id = 1;
-		$period = 'days';					//hours" "days" "weeks" "months"
-		$steps = 12;						//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$period = 'days';                    //hours" "days" "weeks" "months"
+		$steps = 12;                        //Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
 
 		$response = $this->Message->getTransactionalMessage($message_id, $period, $steps);
 		$response = json_decode(json_encode($response), true);
@@ -135,8 +166,8 @@ class MessagesController extends CustomerIOAppController
 	{
 		//test data
 		$message_id = 1;
-		$period = 'days';					//hours" "days" "weeks" "months"
-		$steps = 12;						//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$period = 'days';                    //hours" "days" "weeks" "months"
+		$steps = 12;                        //Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
 
 		$response = $this->Message->getTransactionalMessageMetrics($message_id, $period, $steps);
 		$response = json_decode(json_encode($response), true);
@@ -148,8 +179,8 @@ class MessagesController extends CustomerIOAppController
 	{
 		//test data
 		$message_id = 1;
-		$period = 'days';					//hours" "days" "weeks" "months"
-		$steps = 12;						//Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
+		$period = 'days';                    //hours" "days" "weeks" "months"
+		$steps = 12;                        //Maximums are 24 hours, 45 days, 12 weeks, or 120 months.
 		$unique = false;
 
 		$response = $this->Message->getTransactionalMessageLinkMetrics($message_id, $period, $steps, $unique);
@@ -162,10 +193,10 @@ class MessagesController extends CustomerIOAppController
 	{
 		//test data
 		$message_id = 1;
-		$start = "days";
+		$start = "";
 		$limit = 12;
-		$metric = 'created';						//"created" "attempted" "sent" "delivered" "opened" "clicked" "converted" "bounced" "spammed" "unsubscribed" "dropped" "failed" "undeliverable"
-		$state = 'failed';							//"failed" "sent" "drafted" "attempted"
+		$metric = 'created';                        //"created" "attempted" "sent" "delivered" "opened" "clicked" "converted" "bounced" "spammed" "unsubscribed" "dropped" "failed" "undeliverable"
+		$state = 'failed';                            //"failed" "sent" "drafted" "attempted"
 
 		$response = $this->Message->getTransactionalMessageDeliveries($message_id, $start, $limit, $metric, $state);
 		$response = json_decode(json_encode($response), true);

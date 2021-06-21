@@ -36,8 +36,8 @@ class CollectionsController extends CustomerIOAppController
 
 	public function createCollection()
 	{
-		//test data
-		$name = 'testCollection22';
+//		//test data for "Local Data"
+		$name = 'testCollection2442';
 		$dataCollection = array(
 			0 =>
 				array(
@@ -46,7 +46,17 @@ class CollectionsController extends CustomerIOAppController
 				),
 		);
 
-		$response = $this->Collection->createCollection($name, $dataCollection);
+		$response = $this->Collection->createCollectionLocalData($name, $dataCollection);
+//		//end for test data for "Local Data"
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//		//test data for "Data by URL"
+//		$name = 'testCollection22';
+//		$DataByURL = 'http://someurl.com/file.json';				//need to be correct data array
+//
+//		$response = $this->Collection->createCollectionURL($name, $DataByURL);
+//		//end for test data for "Data by URL"
+
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -86,17 +96,26 @@ class CollectionsController extends CustomerIOAppController
 
 	public function updateCollection()
 	{
-		//test data
+		//test data for "Local Data"
 		$collection_id = 10;
 		$name = 'TestName';
 		$dataCollection = array(
-							0 =>
-								array(
-									'eventName' => "SomeEvent",
-									'eventDate' => time(),
-								),
-						);
-		$response = $this->Collection->updateCollection($collection_id, $name,$dataCollection);
+			0 =>
+				array(
+					'eventName' => "SomeEvent",
+					'eventDate' => time(),
+				),
+		);
+		$response = $this->Collection->updateCollectionLocalData($collection_id, $name, $dataCollection);
+		//end test data for "Local Data"
+
+//		//test data for "Data by URL"
+//		$collection_id = 10;
+//		$name = 'TestName';
+//		$DataByURL = 'http://someurl.com/file.json';
+//		$response = $this->Collection->updateCollectionURL($collection_id, $name, $DataByURL);
+//		//end test data for "Data By URL"
+
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;

@@ -112,9 +112,11 @@ class Campaign extends CustomerIOAppModel
 	/*
 	 * Update a campaign action
 	 * Update the contents of a campaign action, including the body of messages and HTTP requests.
+	 *
+	 * Email / message
 	 */
 
-	public function updateCampaignAction($campaign_id, $action_id, $body, $sending_state, $from_id, $reply_to_id, $recipient, $subject, $headers)
+	public function updateCampaignActionEmail($campaign_id, $action_id, $body, $sending_state, $from_id, $reply_to_id, $recipient, $subject, $headers)
 	{
 		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/actions/' . $action_id;
 		$header = $this->getHeaderAuthBearerJson();
@@ -129,6 +131,27 @@ class Campaign extends CustomerIOAppModel
 			'subject' => $subject,
 			'headers' =>
 				$headers
+		);
+		$request = json_decode($this->cURLPut($url, $header, json_encode($data)));
+		return $request;
+	}
+
+	/*
+	 * Webhook
+	 */
+
+	public function updateCampaignActionWebhook($campaign_id, $action_id, $body, $WebhookURL, $headers, $method, $sending_state)
+	{
+		$url = $this->getBetaAPIURL() . 'campaigns/' . $campaign_id . '/actions/' . $action_id;
+		$header = $this->getHeaderAuthBearerJson();
+		$data = array(
+			'created' => time(),
+			'updated' => time(),
+			'body' => $body,
+			'url' => $WebhookURL,
+			'headers' => $headers,
+			'method' => $method,
+			'sending_state' => $sending_state
 		);
 		$request = json_decode($this->cURLPut($url, $header, json_encode($data)));
 		return $request;

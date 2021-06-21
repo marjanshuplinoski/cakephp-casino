@@ -18,25 +18,59 @@ class Message extends CustomerIOAppModel
 	/*
 	 * Send a transactional email
 	 * Send a transactional email. You can send a with a template using a transactional_message_id or send your own body, subject, and from values at send time.
+	 *
+	 * With template
 	 */
 
-	public function sendTransactionalEmail($transactional_msg_id, $to, $from, $subject, $identifier, $message_data, $bcc, $reply_to, $preheader, $plaintext_body, $attachments, $headers, $disable_message_retention, $send_to_unsubscribed, $tracked, $queue_draft, $disable_css_preprocessing)
+	public function sendTransactionalEmailWithTemplate($transactional_msg_id, $to, $identifier, $body, $subject, $from, $message_data, $bcc, $reply_to, $preheader, $plaintext_body, $attachments, $headers, $disable_message_retention, $send_to_unsubscribed, $tracked, $queue_draft, $disable_css_preprocessing)
 	{
 		$url = $this->getAPPAPIURL() . 'send/email';
 		$header = $this->getHeaderAuthBearerJson();
 		$data = array(
 			'transactional_message_id' => $transactional_msg_id,
 			'to' => $to,
-			'from' => $from,
+			'identifiers' => $identifier,
+			'body' => $body,
 			'subject' => $subject,
+			'from' => $from,
+			'message_data' => $message_data,
+			'bcc' => $bcc,
+			'reply_to' => $reply_to,
+			'preheader' => $preheader,
+			'plaintext_body' => $plaintext_body,
+//			'attachments' => $attachments,
+//			'headers' => $headers,
+			'disable_message_retention' => $disable_message_retention,
+			'send_to_unsubscribed' => $send_to_unsubscribed,
+			'tracked' => $tracked,
+			'queue_draft' => $queue_draft,
+			'disable_css_preprocessing' => $disable_css_preprocessing,
+		);
+		$request = json_decode($this->cURLPost($url, $header, json_encode($data)));
+		return $request;
+	}
+
+	/*
+	 * Without template
+	 */
+
+	public function sendTransactionalEmailWithoutTemplate($body, $subject, $from, $to, $identifier, $message_data, $bcc, $reply_to, $preheader, $plaintext_body, $attachments, $headers, $disable_message_retention, $send_to_unsubscribed, $tracked, $queue_draft, $disable_css_preprocessing)
+	{
+		$url = $this->getAPPAPIURL() . 'send/email';
+		$header = $this->getHeaderAuthBearerJson();
+		$data = array(
+			'body' => $body,
+			'subject' => $subject,
+			'from' => $from,
+			'to' => $to,
 			'identifiers' => $identifier,
 			'message_data' => $message_data,
 			'bcc' => $bcc,
 			'reply_to' => $reply_to,
 			'preheader' => $preheader,
 			'plaintext_body' => $plaintext_body,
-			'attachments' => $attachments,
-			'headers' => $headers,
+//			'attachments' => $attachments,
+//			'headers' => $headers,
 			'disable_message_retention' => $disable_message_retention,
 			'send_to_unsubscribed' => $send_to_unsubscribed,
 			'tracked' => $tracked,

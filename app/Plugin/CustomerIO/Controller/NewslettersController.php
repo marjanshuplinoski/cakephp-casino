@@ -100,7 +100,7 @@ class NewslettersController extends CustomerIOAppController
 	{
 		//test data
 		$newsletter_id = 3;
-		$start = '1';
+		$start = '';
 		$limit = 1;
 		$metric = "created";					//"created" "attempted" "sent" "delivered" "opened" "clicked" "converted" "bounced" "spammed" "unsubscribed" "dropped" "failed" "undeliverable"
 

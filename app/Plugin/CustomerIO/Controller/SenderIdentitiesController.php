@@ -37,7 +37,7 @@ class SenderIdentitiesController extends CustomerIOAppController
 	public function listSenderIdentities()
 	{
 		//test data
-		$start = 'start';
+		$start = '';
 		$limit = 1;
 		$sort = 'asc';				//"asc" "desc"
 

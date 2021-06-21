@@ -99,7 +99,7 @@ class CampaignsController extends CustomerIOAppController
 	{
 		//test data
 		$campaign_id = 1;
-		$start = '1';
+		$start = '';
 		$limit = 1;
 		$type = 'email';			//"email" "webhook" "twilio" "urban_airship" "slack" "push"
 		$metric = "created";		//"created" "attempted" "sent" "delivered" "opened" "clicked" "converted" "bounced" "spammed" "unsubscribed" "dropped" "failed" "undeliverable"
@@ -125,7 +125,7 @@ class CampaignsController extends CustomerIOAppController
 
 	public function updateCampaignAction()
 	{
-		//test data
+		//test data "Email / message"
 		$campaign_id = 1;
 		$action_id = 3;
 		$body = 'string';
@@ -142,7 +142,30 @@ class CampaignsController extends CustomerIOAppController
 				)
 		);
 
-		$response = $this->Campaign->updateCampaignAction($campaign_id, $action_id, $body, $sending_state, $from_id, $reply_to_id, $recipient, $subject, $headers);
+		$response = $this->Campaign->updateCampaignActionEmail($campaign_id, $action_id, $body, $sending_state, $from_id, $reply_to_id, $recipient, $subject, $headers);
+		//end test data "Email / message"
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//		//test data "Webhook"
+//		$campaign_id = 1;
+//		$action_id = 3;
+//		$body = 'string';
+//		$WebhookURL= 'http://someurl.com/webhook';
+//		$headers = array(
+//			0 =>
+//				array(
+//					'property1' => 'string',
+//					'property2' => 'string'
+//				)
+//		);
+//		$method = 'get'; 						//"get" "post" "put" "delete" "patch"
+//		$sending_state = 'draft';				//"automatic" "draft" "off"
+//
+//
+//		$response = $this->Campaign->updateCampaignActionWebhook($campaign_id, $action_id, $body, $WebhookURL, $headers, $method, $sending_state);
+//		//end test data "Email / message"
+
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;

@@ -18,15 +18,33 @@ class Collection extends CustomerIOAppModel
 	/*
 	 * Create a collection
 	 * Create a new collection and provide the data that you'll access from the collection or the url that you'll download the data from.
+	 *
+	 * Local Data
 	 */
 
-	public function createCollection($name, $dataCollection)
+	public function createCollectionLocalData($name, $dataCollection)
 	{
 		$url = $this->getBetaAPIURL() . 'collections';
 		$header = $this->getHeaderAuthBearerJson();
 		$data = array(
 			'name' => $name,
 			'data' => $dataCollection
+		);
+		$request = json_decode($this->cURLPost($url, $header, json_encode($data)));
+		return $request;
+	}
+
+	/*
+	* Data by URL
+	 */
+
+	public function createCollectionURL($name, $DataByURL)
+	{
+		$url = $this->getBetaAPIURL() . 'collections';
+		$header = $this->getHeaderAuthBearerJson();
+		$data = array(
+			'name' => $name,
+			'url' => $DataByURL
 		);
 		$request = json_decode($this->cURLPost($url, $header, json_encode($data)));
 		return $request;
@@ -77,15 +95,33 @@ class Collection extends CustomerIOAppModel
 	/*
 	 * Update a collection
 	 * Update the name or contents of a collection. Updating the data or url for your collection fully replaces the contents of the collection.
+	 *
+	 * Local Data
 	 */
 
-	public function updateCollection($collection_id, $name, $dataCollection)
+	public function updateCollectionLocalData($collection_id, $name, $dataCollection)
 	{
 		$url = $this->getBetaAPIURL() . 'collections/' . $collection_id;
 		$header = $this->getHeaderAuthBearerJson();
 		$data = array(
 			'name' => $name,
 			'data' => $dataCollection
+		);
+		$request = json_decode($this->cURLPut($url, $header, json_encode($data)));
+		return $request;
+	}
+
+	/*
+	 * Data by URL
+	 */
+
+	public function updateCollectionURL($collection_id, $name, $DataByURL)
+	{
+		$url = $this->getBetaAPIURL() . 'collections/' . $collection_id;
+		$header = $this->getHeaderAuthBearerJson();
+		$data = array(
+			'name' => $name,
+			'url' => $DataByURL
 		);
 		$request = json_decode($this->cURLPut($url, $header, json_encode($data)));
 		return $request;

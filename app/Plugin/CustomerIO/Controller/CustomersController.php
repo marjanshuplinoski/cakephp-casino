@@ -154,7 +154,7 @@ class CustomersController extends CustomerIOAppController
 	{
 		//test data
 		$customer_id = 887;
-		$start = "something";
+		$start = "";
 		$limit = 1;
 		$response = $this->Customer->lookupCustomerAttributes($customer_id, $start, $limit);
 		$response = json_decode(json_encode($response), true);
@@ -188,7 +188,7 @@ class CustomersController extends CustomerIOAppController
 	{
 		//test data
 		$customer_id = 887;
-		$start = 'start';
+		$start = '';
 		$limit = 1;
 
 		$response = $this->Customer->lookupMessagesSentToCustomer($customer_id, $start, $limit);
@@ -201,7 +201,7 @@ class CustomersController extends CustomerIOAppController
 	{
 		//test data
 		$customer_id = 887;
-		$start = 'something';
+		$start = '';
 		$limit = 1;
 		$type = 'event';			//"page" "event" "attribute_change" "failed_attribute_change" "stripe_event" "drafted_email" "failed_email" "dropped_email" "sent_email" "spammed_email" "bounced_email" "delivered_email" "triggered_email" "opened_email" "clicked_email" "converted_email" "unsubscribed_email" "attempted_email" "undeliverable_email" "device_change" "attempted_action" "drafted_action" "sent_action" "delivered_action" "bounced_action" "failed_action" "converted_action" "undeliverable_action" "opened_action" "secondary:dropped_email" "secondary:spammed_email" "secondary:bounced_email" "secondary:delivered_email" "secondary:opened_email" "secondary:clicked_email" "secondary:failed_email"
 		$name = "someevent";

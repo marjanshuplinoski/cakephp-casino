@@ -79,10 +79,9 @@ class ExportsController extends CustomerIOAppController
 
 	public function exportInfoAboutDeliveries()
 	{
-		//test data
+//		//test data
 		$newsletter_id = 1;
-		$segment_id = 1;
-		$attributes = array(
+		$attribute = array(
 			"and" => array(
 				array(
 					"and" => array(
@@ -161,7 +160,42 @@ class ExportsController extends CustomerIOAppController
 		$metric = 'created';                        //"created" "attempted" "sent" "delivered" "opened" "clicked" "converted" "bounced" "spammed" "unsubscribed" "dropped" "failed" "undeliverable"
 		$drafts = false;
 
-		$response = $this->Export->exportInfoAboutDeliveries($newsletter_id, $attributes, $metric, $drafts);
+		$response = $this->Export->exportInfoAboutDeliveriesNewsletter($newsletter_id, $attribute, $metric, $drafts);
+//		//end test data "Newsletter"
+//		///////////////////////////////////////////////////////////////////////////////////////////
+//		/// ///////////////////////////////////////////////////////////////////////////////////////
+//
+//		//test data "Campaign"
+//		$campaign_id = 1;
+//		$attribute = array(			"and" => array(				array(					"and" => array(						array(							"and" => array(								array(									"segment" => array(										"id" => "2"									),									"attribute" => array(										"field" => "unsubscribed",										"operator" => "eq",										"value" => true									)								)							),							"or" => array(								array(									"segment" => array(										"id" => "1"									),									"attribute" => array(										"field" => "unsubscribed",										"operator" => "eq",										"value" => true									)								)							),							"not" => array(								"and" => array(									array(										"segment" => array(											"id" => "1"										),										"attribute" => array(											"field" => "unsubscribed",											"operator" => "eq",											"value" => true										)									)								),								"or" => array(									array(										"segment" => array(											"id" => "2"										),										"attribute" => array(											"field" => "unsubscribed",											"operator" => "eq",											"value" => true										)									)								),								"segment" => array(									"id" => "3"								),								"attribute" => array(									"field" => "unsubscribed",									"operator" => "eq",									"value" => true								)							),							"segment" => array(								"id" => "4"							),							"attribute" => array(								"field" => "unsubscribed",								"operator" => "eq",								"value" => true							)						)					)				)			)		);
+//		$metric = 'created';                        //"created" "attempted" "sent" "delivered" "opened" "clicked" "converted" "bounced" "spammed" "unsubscribed" "dropped" "failed" "undeliverable"
+//		$drafts = false;
+//		$response = $this->Export->exportInfoAboutDeliveriesCampaign($campaign_id, $attribute, $metric, $drafts);
+//		//end test data "Campaign"
+
+//		///////////////////////////////////////////////////////////////////////////////////////////
+////		/ ///////////////////////////////////////////////////////////////////////////////////////
+//
+//		//test data "Transactional Message"
+//		$trans_message_id = 1;
+//		$segment_id = 1;
+//		$attribute = array(			"and" => array(				array(					"and" => array(						array(							"and" => array(								array(									"segment" => array(										"id" => "2"									),									"attribute" => array(										"field" => "unsubscribed",										"operator" => "eq",										"value" => true									)								)							),							"or" => array(								array(									"segment" => array(										"id" => "1"									),									"attribute" => array(										"field" => "unsubscribed",										"operator" => "eq",										"value" => true									)								)							),							"not" => array(								"and" => array(									array(										"segment" => array(											"id" => "1"										),										"attribute" => array(											"field" => "unsubscribed",											"operator" => "eq",											"value" => true										)									)								),								"or" => array(									array(										"segment" => array(											"id" => "2"										),										"attribute" => array(											"field" => "unsubscribed",											"operator" => "eq",											"value" => true										)									)								),								"segment" => array(									"id" => "3"								),								"attribute" => array(									"field" => "unsubscribed",									"operator" => "eq",									"value" => true								)							),							"segment" => array(								"id" => "4"							),							"attribute" => array(								"field" => "unsubscribed",								"operator" => "eq",								"value" => true							)						)					)				)			)		);
+//		$metric = 'created';                        //"created" "attempted" "sent" "delivered" "opened" "clicked" "converted" "bounced" "spammed" "unsubscribed" "dropped" "failed" "undeliverable"
+//		$drafts = false;
+//		$response = $this->Export->exportInfoAboutDeliveriesTransactionalMessage($trans_message_id, $attribute, $metric, $drafts);
+//		//end test data "Transactional Message"
+//
+////		///////////////////////////////////////////////////////////////////////////////////////////
+////		/ ///////////////////////////////////////////////////////////////////////////////////////
+//
+//		//test data "Action"
+//		$action_id = 1;
+//		$attribute = array(			"and" => array(				array(					"and" => array(						array(							"and" => array(								array(									"segment" => array(										"id" => "2"									),									"attribute" => array(										"field" => "unsubscribed",										"operator" => "eq",										"value" => true									)								)							),							"or" => array(								array(									"segment" => array(										"id" => "1"									),									"attribute" => array(										"field" => "unsubscribed",										"operator" => "eq",										"value" => true									)								)							),							"not" => array(								"and" => array(									array(										"segment" => array(											"id" => "1"										),										"attribute" => array(											"field" => "unsubscribed",											"operator" => "eq",											"value" => true										)									)								),								"or" => array(									array(										"segment" => array(											"id" => "2"										),										"attribute" => array(											"field" => "unsubscribed",											"operator" => "eq",											"value" => true										)									)								),								"segment" => array(									"id" => "3"								),								"attribute" => array(									"field" => "unsubscribed",									"operator" => "eq",									"value" => true								)							),							"segment" => array(								"id" => "4"							),							"attribute" => array(								"field" => "unsubscribed",								"operator" => "eq",								"value" => true							)						)					)				)			)		);
+//		$metric = 'created';                        //"created" "attempted" "sent" "delivered" "opened" "clicked" "converted" "bounced" "spammed" "unsubscribed" "dropped" "failed" "undeliverable"
+//		$drafts = false;
+//		$response = $this->Export->exportInfoAboutDeliveriesAction($action_id, $attribute, $metric, $drafts);
+//		//end test data "Action"
+
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;

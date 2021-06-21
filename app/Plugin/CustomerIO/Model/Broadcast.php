@@ -20,37 +20,39 @@ class Broadcast extends CustomerIOAppModel
 	 * The shape of the request changes based on the type of audience you broadcast to: a segment,
 	 * a list of emails, a list of customer IDs, a map of users, or a data file. You can reference
 	 * properties in the data object from this request using liquid—{{trigger.<property_in_data_obj>}}.
+	 *
+	 * Audience Filter
 	 */
 
-	public function triggerBroadcast($broadcast_id, $segmentID, $orField, $orField2, $orValue, $orValue2, $orNotField, $orNotValue, $dataHeadline, $dataText, $email_add_duplicates, $email_ignore_missing, $id_ignore_missing)
+	public function triggerBroadcastAudienceFilter($broadcast_id, $segmentID, $orField, $orField2, $orValue, $orValue2, $orNotField, $orNotValue, $dataHeadline, $dataText, $email_add_duplicates, $email_ignore_missing, $id_ignore_missing)
 	{
 		$url = $this->getAPPAPIURL() . '/campaigns/' . $broadcast_id . '/triggers';
 		$header = $this->getHeaderAuthBearerJson();
 		$data = array(
 			"recipients" => array(
 				"and" => array(
-					"0" => array(
+					array(
 						"segment" => array(
 							"id" => $segmentID
 						)
 					),
-					"1" => array(
+					array(
 						"or" => array(
-							"0" => array(
+							array(
 								"attribute" => array(
 									"field" => $orField,
 									"operator" => "eq",
 									"value" => $orValue
 								)
 							),
-							"1" => array(
+							array(
 								"attribute" => array(
 									"field" => $orField2,
 									"operator" => "eq",
 									"value" => $orValue2
 								)
 							),
-							"2" => array(
+							array(
 								"not" => array(
 									"attribute" => array(
 										"field" => $orNotField,
@@ -72,6 +74,98 @@ class Broadcast extends CustomerIOAppModel
 			'email_ignore_missing' => $email_ignore_missing,
 			'id_ignore_missing' => $id_ignore_missing
 		);
+		$request = json_decode($this->cURLPost($url, $header, json_encode($data)));
+		return $request;
+	}
+
+	/*
+	 * Emails
+	 */
+	public function triggerBroadcastEmail($broadcast_id, $emails, $dataHeadline, $dataText, $email_add_duplicates, $email_ignore_missing, $id_ignore_missing)
+	{
+		$url = $this->getAPPAPIURL() . '/campaigns/' . $broadcast_id . '/triggers';
+		$header = $this->getHeaderAuthBearerJson();
+		$data = array(
+			"emails" => $emails,
+			"data" => array(
+				"headline" => $dataHeadline,
+				"date" => time(),
+				"text" => $dataText
+			),
+			'email_add_duplicates' => $email_add_duplicates,
+			'email_ignore_missing' => $email_ignore_missing,
+			'id_ignore_missing' => $id_ignore_missing
+		);
+		$request = json_decode($this->cURLPost($url, $header, json_encode($data)));
+		return $request;
+	}
+
+	/*
+	 * Ids
+	 */
+	public function triggerBroadcastIds($broadcast_id, $ids, $dataHeadline, $dataText, $email_add_duplicates, $email_ignore_missing, $id_ignore_missing)
+	{
+		$url = $this->getAPPAPIURL() . '/campaigns/' . $broadcast_id . '/triggers';
+		$header = $this->getHeaderAuthBearerJson();
+		$data = array(
+			"ids" => $ids,
+			"data" => array(
+				"headline" => $dataHeadline,
+				"date" => time(),
+				"text" => $dataText
+			),
+			'email_add_duplicates' => $email_add_duplicates,
+			'email_ignore_missing' => $email_ignore_missing,
+			'id_ignore_missing' => $id_ignore_missing
+		);
+		$request = json_decode($this->cURLPost($url, $header, json_encode($data)));
+		return $request;
+	}
+
+	/*
+	 * User Maps
+	 */
+	public function triggerBroadcastUserMaps($broadcast_id, $per_user_data, $dataHeadline, $dataText, $email_add_duplicates, $email_ignore_missing, $id_ignore_missing)
+	{
+		$url = $this->getAPPAPIURL() . '/campaigns/' . $broadcast_id . '/triggers';
+		$header = $this->getHeaderAuthBearerJson();
+		$data =
+			array(
+				"per_user_data" => $per_user_data,
+				"data" => array(
+					"headline" => $dataHeadline,
+					"date" => time(),
+					"text" => $dataText
+				),
+				"email_add_duplicates" => $email_add_duplicates,
+				"email_ignore_missing" => $email_ignore_missing,
+				"id_ignore_missing" => $id_ignore_missing
+			);
+
+		$request = json_decode($this->cURLPost($url, $header, json_encode($data)));
+		return $request;
+	}
+
+	/*
+	 * User Maps
+	 */
+	public function triggerBroadcastURL($broadcast_id, $DataURL, $dataHeadline, $dataText, $email_add_duplicates, $email_ignore_missing, $id_ignore_missing)
+	{
+		$url = $this->getAPPAPIURL() . '/campaigns/' . $broadcast_id . '/triggers';
+		$header = $this->getHeaderAuthBearerJson();
+		$data =
+			array(
+				"data_file_url" => $DataURL,
+				"data" => array(
+					"headline" => $dataHeadline,
+					"date" => time(),
+					"text" => $dataText
+				),
+				"email_add_duplicates" => $email_add_duplicates,
+				"email_ignore_missing" => $email_ignore_missing,
+				"id_ignore_missing" => $id_ignore_missing
+			);
+
 		$request = json_decode($this->cURLPost($url, $header, json_encode($data)));
 		return $request;
 	}
@@ -203,6 +297,8 @@ class Broadcast extends CustomerIOAppModel
 	/*
 	 * Update a broadcast action
 	 * Update the contents of a broadcast action, including the body of messages or HTTP requests.
+	 *
+	 * Email / message
 	 */
 
 	public function updateBroadcastAction($broadcast_id, $action_id, $body, $sending_state, $from_id, $reply_to_id, $recipient, $subject, $headers)
@@ -220,6 +316,27 @@ class Broadcast extends CustomerIOAppModel
 			'subject' => $subject,
 			'headers' =>
 				$headers
+		);
+		$request = json_decode($this->cURLPut($url, $header, json_encode($data)));
+		return $request;
+	}
+
+	/*
+ 	 * Webhook
+	 */
+
+	public function updateBroadcastActionWebhook($broadcast_id, $action_id, $body, $DataURL, $headers, $method, $sending_state)
+	{
+		$url = $this->getBetaAPIURL() . 'broadcasts/' . $broadcast_id . '/actions/' . $action_id;
+		$header = $this->getHeaderAuthBearerJson();
+		$data = array(
+			'created' => time(),
+			'updated' => time(),
+			'body' => $body,
+			'url' => $DataURL,
+			'headers' => $headers,
+			'method' => $method,
+			'sending_state' => $sending_state,
 		);
 		$request = json_decode($this->cURLPut($url, $header, json_encode($data)));
 		return $request;
@@ -248,7 +365,7 @@ class Broadcast extends CustomerIOAppModel
 
 	public function getBroadcastActionLinkMetrics($broadcast_id, $action_id, $period, $steps, $type)
 	{
-		$url = $this->getBetaAPIURL() . 'broadcasts/' . $broadcast_id . '/actions/' . $action_id . '/metrics/links'. '?period=' . $period . '&steps=' . $steps . '&type=' . $type;
+		$url = $this->getBetaAPIURL() . 'broadcasts/' . $broadcast_id . '/actions/' . $action_id . '/metrics/links' . '?period=' . $period . '&steps=' . $steps . '&type=' . $type;
 		$header = $this->getHeaderAuthBearer();
 		$request = json_decode($this->cURLGet($url, $header));
 		return $request;
