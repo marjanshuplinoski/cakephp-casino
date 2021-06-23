@@ -2,19 +2,19 @@
 
 App::uses('AppModel', 'Model');
 
-class DamAppModel extends AppModel
+class DamgiAppModel extends AppModel
 {
 
 
 	public function __construct($id = false, $table = null, $ds = null)
 	{
 		parent::__construct($id, $table, $ds);
-		Configure::load('Dam.Dam');
+		Configure::load('Damgi.Damgi');
 
-		if (Configure::read('Dam.Config') == 0)
+		if (Configure::read('Damgi.Config') == 0)
 			throw new Exception('Config not found', 500);
 
-		$this->config = Configure::read('Dam.Config');
+		$this->config = Configure::read('Damgi.Config');
 	}
 
 	/*
@@ -142,7 +142,7 @@ class DamAppModel extends AppModel
 
 	/*
 	 * Get all currencies
-	 * Allows you to list all supported currencies at Dam.gi
+	 * Allows you to list all supported currencies at Damgi.gi
 	 */
 
 	public function getAllCurrencies()
@@ -155,7 +155,7 @@ class DamAppModel extends AppModel
 
 	/*
 	 *Get withdrawal (on-chain) fees & minimum withdrawal amounts
-	 * Dam.gi does not cover the associated on-chain fees for crypto withdrawals. The endpoint allows you to get the
+	 * Damgi.gi does not cover the associated on-chain fees for crypto withdrawals. The endpoint allows you to get the
 	 * current on-chain fees and minimum withdrawal amounts per coin. You can add query param to display the fees
 	 * and the minimum amounts in fiat.
 	 */

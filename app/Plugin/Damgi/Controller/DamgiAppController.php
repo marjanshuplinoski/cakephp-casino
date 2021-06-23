@@ -2,13 +2,13 @@
 
 App::uses('AppController', 'Controller');
 
-class DamAppController extends AppController
+class DamgiAppController extends AppController
 {
 	/**
 	 * Controller name
 	 * @var $name string
 	 */
-	public $name = 'DamApp';
+	public $name = 'DamgiApp';
 
 	/**
 	 * Paginate
@@ -20,7 +20,7 @@ class DamAppController extends AppController
 	 * Models
 	 * @var array
 	 */
-	public $uses = array('Dam.Dam');
+	public $uses = array('Damgi.Damgi');
 
 	public $components = array('Auth');
 
@@ -51,7 +51,7 @@ class DamAppController extends AppController
 			'locale' => 'en-US',                                                //en-US, de-DE, es-ES, fr-FR
 			'clientPaymentId' => '11'
 		);
-		$response = $this->Dam->initiateDepositRequest($body);
+		$response = $this->Damgi->initiateDepositRequest($body);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -67,7 +67,7 @@ class DamAppController extends AppController
 			'displayAmount' => 11
 		);
 
-		$response = $this->Dam->SubmitDepositData($paymentID, $body);
+		$response = $this->Damgi->SubmitDepositData($paymentID, $body);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -77,7 +77,7 @@ class DamAppController extends AppController
 	{
 		$paymentID = 1;
 
-		$response = $this->Dam->getDepositData($paymentID);
+		$response = $this->Damgi->getDepositData($paymentID);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -97,7 +97,7 @@ class DamAppController extends AppController
 			'destinationTag' => '0'                                        //Applicable for XRP and XLM If no destinationTag is needed 0 should be entered
 		);
 
-		$response = $this->Dam->initiateWithdrawalRequest($body);
+		$response = $this->Damgi->initiateWithdrawalRequest($body);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -111,7 +111,7 @@ class DamAppController extends AppController
 			'address' => 'walletAddr'                                        //Wallet address to be checked
 		);
 
-		$response = $this->Dam->validateAddress($body);
+		$response = $this->Damgi->validateAddress($body);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -123,7 +123,7 @@ class DamAppController extends AppController
 		//test data
 		$ID = 1;
 
-		$response = $this->Dam->getBusinessByID($ID);
+		$response = $this->Damgi->getBusinessByID($ID);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -145,7 +145,7 @@ class DamAppController extends AppController
 			'limit' => 1                                                    // max 2000
 
 		);
-		$response = $this->Dam->getBusinessDeposits($ID, $query);
+		$response = $this->Damgi->getBusinessDeposits($ID, $query);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -165,7 +165,7 @@ class DamAppController extends AppController
 			'sortBy' => 'created',                                           //Sort payment by created
 
 		);
-		$response = $this->Dam->getBusinessWithdrawals($query);
+		$response = $this->Damgi->getBusinessWithdrawals($query);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -176,7 +176,7 @@ class DamAppController extends AppController
 	{
 		//test data
 		$ID = 1;
-		$response = $this->Dam->getBusinessBalance($ID);
+		$response = $this->Damgi->getBusinessBalance($ID);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -184,7 +184,7 @@ class DamAppController extends AppController
 
 	public function getAllCurrencies()
 	{
-		$response = $this->Dam->getAllCurrencies();
+		$response = $this->Damgi->getAllCurrencies();
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -196,7 +196,7 @@ class DamAppController extends AppController
 		$query = array(
 			'displayCurrency' => 'USD'                                //EUR  USD  GBP
 		);
-		$response = $this->Dam->getWithdrawalFees($coin, $query);
+		$response = $this->Damgi->getWithdrawalFees($coin, $query);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -208,7 +208,7 @@ class DamAppController extends AppController
 			'fromCurrency' => 'BTC',                                //Accepts all supported cryptocurrencies comma delimited
 			'toCurrency'=>'USD'										// EUR USD GBP
 		);
-		$response = $this->Dam->getExchangeRatesCrypto($query);
+		$response = $this->Damgi->getExchangeRatesCrypto($query);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -220,7 +220,7 @@ class DamAppController extends AppController
 			'fromCurrency' => 'USD',                                //Accepts all supported cryptocurrencies comma delimited
 			'toCurrency'=>'EUR,GBP'										// EUR USD GBP
 		);
-		$response = $this->Dam->getExchangeRatesFiat($query);
+		$response = $this->Damgi->getExchangeRatesFiat($query);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;

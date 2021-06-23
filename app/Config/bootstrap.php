@@ -114,4 +114,4 @@ CakePlugin::load('DebugKit');
 CakePlugin::load('old_CustomerIO');
 CakePlugin::load('Aninda');
 CakePlugin::load('CustomerIO');
-CakePlugin::load('Dam');
+CakePlugin::load('Damgi');

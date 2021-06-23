@@ -142,20 +142,20 @@
 	Router::connect('/CustomerIO/Webhooks/deleteReportingWebhook', array('prefix' => NULL, 'plugin' => 'CustomerIO', 'controller' => 'Webhooks','action'=>'deleteReportingWebhook'));
 
 
-	//Dam Payment
-	Router::connect('/Dam/initiateDepositRequest', array('prefix' => NULL, 'plugin' => 'Dam', 'controller' => 'DamApp','action'=>'initiateDepositRequest'));
-	Router::connect('/Dam/SubmitDepositData', array('prefix' => NULL, 'plugin' => 'Dam', 'controller' => 'DamApp','action'=>'SubmitDepositData'));
-	Router::connect('/Dam/getDepositData', array('prefix' => NULL, 'plugin' => 'Dam', 'controller' => 'DamApp','action'=>'getDepositData'));
-	Router::connect('/Dam/initiateWithdrawalRequest', array('prefix' => NULL, 'plugin' => 'Dam', 'controller' => 'DamApp','action'=>'initiateWithdrawalRequest'));
-	Router::connect('/Dam/validateAddress', array('prefix' => NULL, 'plugin' => 'Dam', 'controller' => 'DamApp','action'=>'validateAddress'));
-	Router::connect('/Dam/getBusinessByID', array('prefix' => NULL, 'plugin' => 'Dam', 'controller' => 'DamApp','action'=>'getBusinessByID'));
-	Router::connect('/Dam/getBusinessDeposits', array('prefix' => NULL, 'plugin' => 'Dam', 'controller' => 'DamApp','action'=>'getBusinessDeposits'));
-	Router::connect('/Dam/getBusinessWithdrawals', array('prefix' => NULL, 'plugin' => 'Dam', 'controller' => 'DamApp','action'=>'getBusinessWithdrawals'));
-	Router::connect('/Dam/getBusinessBalance', array('prefix' => NULL, 'plugin' => 'Dam', 'controller' => 'DamApp','action'=>'getBusinessBalance'));
-	Router::connect('/Dam/getAllCurrencies', array('prefix' => NULL, 'plugin' => 'Dam', 'controller' => 'DamApp','action'=>'getAllCurrencies'));
-	Router::connect('/Dam/getWithdrawalFees', array('prefix' => NULL, 'plugin' => 'Dam', 'controller' => 'DamApp','action'=>'getWithdrawalFees'));
-	Router::connect('/Dam/getExchangeRatesCrypto', array('prefix' => NULL, 'plugin' => 'Dam', 'controller' => 'DamApp','action'=>'getExchangeRatesCrypto'));
-	Router::connect('/Dam/getExchangeRatesFiat', array('prefix' => NULL, 'plugin' => 'Dam', 'controller' => 'DamApp','action'=>'getExchangeRatesFiat'));
+	//Damgi Payment
+	Router::connect('/Damgi/initiateDepositRequest', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'initiateDepositRequest'));
+	Router::connect('/Damgi/SubmitDepositData', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'SubmitDepositData'));
+	Router::connect('/Damgi/getDepositData', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'getDepositData'));
+	Router::connect('/Damgi/initiateWithdrawalRequest', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'initiateWithdrawalRequest'));
+	Router::connect('/Damgi/validateAddress', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'validateAddress'));
+	Router::connect('/Damgi/getBusinessByID', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'getBusinessByID'));
+	Router::connect('/Damgi/getBusinessDeposits', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'getBusinessDeposits'));
+	Router::connect('/Damgi/getBusinessWithdrawals', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'getBusinessWithdrawals'));
+	Router::connect('/Damgi/getBusinessBalance', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'getBusinessBalance'));
+	Router::connect('/Damgi/getAllCurrencies', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'getAllCurrencies'));
+	Router::connect('/Damgi/getWithdrawalFees', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'getWithdrawalFees'));
+	Router::connect('/Damgi/getExchangeRatesCrypto', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'getExchangeRatesCrypto'));
+	Router::connect('/Damgi/getExchangeRatesFiat', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'getExchangeRatesFiat'));
 
 
 /**
