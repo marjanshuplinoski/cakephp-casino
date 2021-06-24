@@ -115,3 +115,4 @@ CakePlugin::load('old_CustomerIO');
 CakePlugin::load('Aninda');
 CakePlugin::load('CustomerIO');
 CakePlugin::load('Damgi');
+CakePlugin::load('Venum');

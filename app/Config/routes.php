@@ -157,6 +157,39 @@
 	Router::connect('/Damgi/getExchangeRatesCrypto', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'getExchangeRatesCrypto'));
 	Router::connect('/Damgi/getExchangeRatesFiat', array('prefix' => NULL, 'plugin' => 'Damgi', 'controller' => 'DamgiApp','action'=>'getExchangeRatesFiat'));
 
+	//Venum
+	Router::connect('/Venum/getPlayerID', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'getPlayerID'));
+	Router::connect('/Venum/casino_create_player_if_not_exists', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_create_player_if_not_exists'));
+	Router::connect('/Venum/casino_player_exists', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_player_exists'));
+	Router::connect('/Venum/player_request_token', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'player_request_token'));
+	Router::connect('/Venum/casino_request_demo_token', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_request_demo_token'));
+	Router::connect('/Venum/player_check_wallet', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'player_check_wallet'));
+	Router::connect('/Venum/player_trigger_cancel', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'player_trigger_cancel'));
+	Router::connect('/Venum/casino_get_balance', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_get_balance'));
+	Router::connect('/Venum/casino_block_player', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_block_player'));
+	Router::connect('/Venum/casino_unblock_player', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_unblock_player'));
+	Router::connect('/Venum/casino_list_games', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_list_games'));
+	Router::connect('/Venum/player_pending_games', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'player_pending_games'));
+	Router::connect('/Venum/casino_clear_old_game_sessions', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_clear_old_game_sessions'));
+	Router::connect('/Venum/ping', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'ping'));
+	Router::connect('/Venum/casino_create_bank_if_not_exists', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_create_bank_if_not_exists'));
+	Router::connect('/Venum/casino_set_bank_for_player', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_set_bank_for_player'));
+	Router::connect('/Venum/casino_unset_bank_for_player', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_unset_bank_for_player'));
+	Router::connect('/Venum/casino_set_jackpot_group_for_bank', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_set_jackpot_group_for_bank'));
+	Router::connect('/Venum/casino_unset_jackpot_group_for_bank', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_unset_jackpot_group_for_bank'));
+	Router::connect('/Venum/player_get_bank', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'player_get_bank'));
+	Router::connect('/Venum/casino_list_banks', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_list_banks'));
+	Router::connect('/Venum/casino_get_payout_stats', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_get_payout_stats'));
+	Router::connect('/Venum/casino_get_payout_stats_per_game', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_get_payout_stats_per_game'));
+	Router::connect('/Venum/casino_jackpot_info', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_jackpot_info'));
+	Router::connect('/Venum/casino_browse_jackpot_history', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_browse_jackpot_history'));
+	Router::connect('/Venum/casino_create_jackpot_group_if_not_exists', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_create_jackpot_group_if_not_exists'));
+	Router::connect('/Venum/casino_disable_jackpots', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_disable_jackpots'));
+	Router::connect('/Venum/casino_enable_jackpots', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_enable_jackpots'));
+	Router::connect('/Venum/casino_egt_jackpot_info', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'casino_egt_jackpot_info'));
+	Router::connect('/Venum/getPlayerBalance', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'getPlayerBalance'));
+	Router::connect('/Venum/withdrawAndDeposit', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'withdrawAndDeposit'));
+	Router::connect('/Venum/cancel', array('prefix' => NULL, 'plugin' => 'Venum', 'controller' => 'VenumApp','action'=>'cancel'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
