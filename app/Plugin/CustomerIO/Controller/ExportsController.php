@@ -70,8 +70,14 @@ class ExportsController extends CustomerIOAppController
 	{
 		//test data
 		$segment_id = 1;
+		$orField1 = 'interest';
+		$orValue1 = 'roadrunners';
+		$orField2 = 'state';
+		$orValue2 = 'NM';
+		$notField = 'species';
+		$notValue = 'roadrunners';
 
-		$response = $this->Export->exportCustomerData($segment_id);
+		$response = $this->Export->exportCustomerData($segment_id, $orField1, $orValue1, $orField2, $orValue2, $notField, $notValue);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;

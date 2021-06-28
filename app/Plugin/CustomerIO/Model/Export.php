@@ -58,7 +58,7 @@ class Export extends CustomerIOAppModel
 	 * Provide filters and attributes describing the customers you want to export. This endpoint returns export metadata; use the /exports/{export_id}/endpoint to download your export.
 	 */
 
-	public function exportCustomerData($segment_id)
+	public function exportCustomerData($segment_id, $orField1, $orValue1, $orField2, $orValue2, $notField, $notValue)
 	{
 		$url = $this->getBetaAPIURL() . 'exports/customers';
 		$header = $this->getHeaderAuthBearerJson();
@@ -74,24 +74,24 @@ class Export extends CustomerIOAppModel
 						"or" => array(
 							array(
 								"attribute" => array(
-									"field" => "interest",
+									"field" => $orField1,
 									"operator" => "eq",
-									"value" => "roadrunners"
+									"value" => $orValue1
 								)
 							),
 							array(
 								"attribute" => array(
-									"field" => "state",
+									"field" => $orField2,
 									"operator" => "eq",
-									"value" => "NM"
+									"value" => $orValue2
 								)
 							),
 							array(
 								"not" => array(
 									"attribute" => array(
-										"field" => "species",
+										"field" => $notField,
 										"operator" => "eq",
-										"value" => "roadrunners"
+										"value" => $notValue
 									)
 								)
 							)

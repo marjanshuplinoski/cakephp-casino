@@ -115,7 +115,7 @@ class CustomersController extends CustomerIOAppController
 	public function customerUnsubscribeHandling()
 	{
 		//test data
-		$delivery_id = 888;
+		$delivery_id = 'delivery_id'; // need to get delivery ID from real message sent via CustomerIO to customer with unsubscribe button
 		$unsubscribe = true;
 		$response = $this->Customer->customerUnsubscribeHandling($delivery_id, $unsubscribe);
 		$response = json_decode(json_encode($response), true);
@@ -137,14 +137,13 @@ class CustomersController extends CustomerIOAppController
 	public function searchForCustomers()
 	{
 		//test data
-		$search_query = 'MD';
-		$andID = 1;
-		$orID = 1;
-		$notID = 1;
-		$orID2 = 1;
+		$search = '';
 		$limit = 1;
+		$operator = 'and';
+		$attributeField = 'email';
+		$attributeValue = 'player6@mail.com';
 
-		$response = $this->Customer->searchForCustomers($search_query, $limit, $andID, $orID, $notID, $orID2);
+		$response = $this->Customer->searchForCustomers($search, $limit, $operator, $attributeField, $attributeValue);
 		$response = json_decode(json_encode($response), true);
 		$this->response->body(json_encode(array('response' => $response)));
 		return $response;
@@ -165,7 +164,7 @@ class CustomersController extends CustomerIOAppController
 	public function listCustomersAndAttributes()
 	{
 		//test data
-		$ids = array('test1', '887');         // up to 100 ids
+		$ids = array("998", "997", "996", "995", "994", "993", "992", "991", "990", "899", "888", "654", "889");         // up to 100 ids
 
 		$response = $this->Customer->listCustomersAndAttributes($ids);
 		$response = json_decode(json_encode($response), true);
@@ -203,7 +202,7 @@ class CustomersController extends CustomerIOAppController
 		$customer_id = 887;
 		$start = '';
 		$limit = 1;
-		$type = 'event';			//"page" "event" "attribute_change" "failed_attribute_change" "stripe_event" "drafted_email" "failed_email" "dropped_email" "sent_email" "spammed_email" "bounced_email" "delivered_email" "triggered_email" "opened_email" "clicked_email" "converted_email" "unsubscribed_email" "attempted_email" "undeliverable_email" "device_change" "attempted_action" "drafted_action" "sent_action" "delivered_action" "bounced_action" "failed_action" "converted_action" "undeliverable_action" "opened_action" "secondary:dropped_email" "secondary:spammed_email" "secondary:bounced_email" "secondary:delivered_email" "secondary:opened_email" "secondary:clicked_email" "secondary:failed_email"
+		$type = 'event';            //"page" "event" "attribute_change" "failed_attribute_change" "stripe_event" "drafted_email" "failed_email" "dropped_email" "sent_email" "spammed_email" "bounced_email" "delivered_email" "triggered_email" "opened_email" "clicked_email" "converted_email" "unsubscribed_email" "attempted_email" "undeliverable_email" "device_change" "attempted_action" "drafted_action" "sent_action" "delivered_action" "bounced_action" "failed_action" "converted_action" "undeliverable_action" "opened_action" "secondary:dropped_email" "secondary:spammed_email" "secondary:bounced_email" "secondary:delivered_email" "secondary:opened_email" "secondary:clicked_email" "secondary:failed_email"
 		$name = "someevent";
 
 		$response = $this->Customer->lookupCustomerActivities($customer_id, $start, $limit, $type, $name);

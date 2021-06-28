@@ -159,82 +159,25 @@ class Customer extends CustomerIOAppModel
 	 * If you want to return a larger set of people in a single request, you may want to use the /exports API instead.
 	 */
 
-	public function searchForCustomers($search_query, $limit, $andID, $orID, $notID, $orID2)
+	public function searchForCustomers($search, $limit, $operator, $attributeField, $attributeValue)
 	{
-		$url = $this->getBetaAPIURL() . 'customers?start=' . $search_query . '&limit=' . $limit;
+		$url = $this->getBetaAPIURL() . 'customers?start=' . $search . '&limit=' . $limit;
+
+
 		$header = $this->getHeaderAuthBearerJson();
 		$data = array(
 			"filter" => array(
-				"and" => array(
-					"0" => array(
-						"and" => array(
-							"0" => array(
-								"segment" => array(
-									"id" => $andID
-								),
-								"attribute" => array(
-									"field" => "unsubscribed",
-									"operator" => "eq",
-									"value" => true
+				$operator =>
+					array(
+						array(
+							'attribute' =>
+								array(
+									'field' => $attributeField,
+									'operator' => 'eq',
+									'value' => $attributeValue,
 								)
-							)
-						),
-						"or" => array(
-							"0" => array(
-								"segment" => array(
-									"id" => $orID
-								),
-								"attribute" => array(
-									"field" => "unsubscribed",
-									"operator" => "eq",
-									"value" => true
-								)
-							)
-						),
-						"not" => array(
-							"and" => array(
-								"0" => array(
-									"segment" => array(
-										"id" => $notID
-									),
-									"attribute" => array(
-										"field" => "unsubscribed",
-										"operator" => "eq",
-										"value" => true
-									)
-								)
-							),
-							"or" => array(
-								"0" => array(
-									"segment" => array(
-										"id" => $orID2
-									),
-									"attribute" => array(
-										"field" => "unsubscribed",
-										"operator" => "eq",
-										"value" => true
-									)
-								)
-							),
-							"segment" => array(
-								"id" => $andID
-							),
-							"attribute" => array(
-								"field" => "unsubscribed",
-								"operator" => "eq",
-								"value" => true
-							)
-						),
-						"segment" => array(
-							"id" => $andID
-						),
-						"attribute" => array(
-							"field" => "unsubscribed",
-							"operator" => "eq",
-							"value" => true
 						)
 					)
-				)
 			)
 		);                // up to 1000 results per page
 		$request = json_decode($this->cURLPost($url, $header, json_encode($data)));
